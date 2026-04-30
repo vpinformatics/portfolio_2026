@@ -1,0 +1,10 @@
+{
+  "name": "vp-informatics-site",
+  "private": true,
+  "version": "1.0.1",
+  "scripts": {
+    "dev": "python -m http.server 4173",
+    "build": "mkdir -p dist && cp index.html dist/index.html && cp -r src dist/src",
+    "preview": "python -m http.server 4173 --directory dist"
+  }
+}
