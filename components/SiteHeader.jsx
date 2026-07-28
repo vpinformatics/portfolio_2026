@@ -37,7 +37,7 @@ export default function SiteHeader() {
         <div className="hidden xl:flex items-center gap-7">
           {navLinks.map(([href, label]) => <a key={label} href={href} className="text-xs font-extrabold uppercase tracking-widest text-slate-500 hover:text-red-600 transition-colors">{label}</a>)}
           <button onClick={toggleTheme} className="theme-toggle-btn px-3 py-2 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center gap-2" aria-label="Toggle light and dark theme">
-            <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
+            <span>{theme === 'dark' ? '☀️' : '🌙'} **</span>
             <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
           <a href="/#contact" className="bg-red-600 text-white px-5 py-2.5 rounded text-xs font-black uppercase tracking-wider hover:bg-slate-950 transition-all flex items-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
