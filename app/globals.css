@@ -87,6 +87,10 @@ body.theme-dark .to-white{--tw-gradient-from:#0B1220!important;--tw-gradient-to:
 body.theme-dark .bg-red-50{background-color:rgba(239,68,68,.12)!important;}
 body.theme-dark .border-red-100,
 body.theme-dark .border-red-200{border-color:rgba(239,68,68,.32)!important;}
+body.theme-dark .bg-emerald-50{background-color:rgba(16,185,129,.12)!important;}
+body.theme-dark .border-emerald-100,
+body.theme-dark .border-emerald-200{border-color:rgba(16,185,129,.32)!important;}
+body.theme-dark .text-emerald-600{color:#34D399!important;}
 body.theme-dark .text-red-600{color:#F87171!important;}
 body.theme-dark .bg-red-600{background-color:#EF4444!important;}
 body.theme-dark .hover\:bg-slate-950:hover{background-color:#020617!important;}

@@ -347,13 +347,19 @@ export default function App() {
           <p className="text-slate-600 text-base md:text-lg font-medium">This section qualifies serious buyers and builds trust before the first call.</p>
         </div>
         <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          <div className="bg-emerald-50 border border-emerald-100 rounded-3xl p-8">
+          <div className="bg-white border border-slate-200 border-t-4 border-t-emerald-500 rounded-3xl p-8 shadow-sm">
             <h3 className="text-2xl font-black text-slate-950 mb-6">When We're The Right Fit</h3>
-            {['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 border-b border-emerald-100 text-sm font-bold text-slate-700">✅ {x}</div>)}
+            {['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
+              <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="CheckCircle2" className="w-3.5 h-3.5" /></span>
+              {x}
+            </div>)}
           </div>
-          <div className="bg-red-50 border border-red-100 rounded-3xl p-8">
+          <div className="bg-white border border-slate-200 border-t-4 border-t-red-500 rounded-3xl p-8 shadow-sm">
             <h3 className="text-2xl font-black text-slate-950 mb-6">When We're Probably Not The Right Fit</h3>
-            {['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 border-b border-red-100 text-sm font-bold text-slate-700">❌ {x}</div>)}
+            {['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
+              <span className="w-5 h-5 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="X" className="w-3.5 h-3.5" /></span>
+              {x}
+            </div>)}
           </div>
         </div>
         <div className="max-w-4xl mx-auto space-y-4">

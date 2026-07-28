@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function VPLogo({ className = 'h-10 sm:h-12 w-auto object-contain' }) {
+export default function VPLogo({ className = 'h-10 sm:h-10 w-auto object-contain' }) {
   const [hasError, setHasError] = useState(false);
   if (hasError) {
     return (
