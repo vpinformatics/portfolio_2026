@@ -1,10 +1,22 @@
 {
-  "name": "vp-informatics-site",
+  "name": "vp-informatics",
+  "version": "1.0.0",
   "private": true,
-  "version": "1.0.1",
   "scripts": {
-    "dev": "python -m http.server 4173",
-    "build": "mkdir -p dist && cp index.html dist/index.html && cp -r src dist/src",
-    "preview": "python -m http.server 4173 --directory dist"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^3.4.4"
   }
 }
