@@ -19,7 +19,7 @@ export default function SiteHeader() {
     document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
     localStorage.setItem('vp-theme', theme);
     const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#0B1220' : '#ffffff');
+    if (themeMeta) themeMeta.setAttribute('content', theme === 'dark' ? '#0A0E14' : '#ffffff');
   }, [theme]);
 
   useEffect(() => {
@@ -33,19 +33,23 @@ export default function SiteHeader() {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-slate-100' : 'bg-transparent py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-        <a href="/#home" className="flex items-center logo-shell"><VPLogo /></a>
-        <div className="hidden xl:flex items-center gap-6">
-          {navLinks.map(([href, label]) => <a key={label} href={href} className="whitespace-nowrap text-xs font-extrabold uppercase tracking-wide text-slate-500 hover:text-red-600 transition-colors">{label}</a>)}
-          <button onClick={toggleTheme} className="theme-toggle-btn px-3 py-2 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center gap-2" aria-label="Toggle light and dark theme">
+        <a href="/#home" className={`flex items-center logo-shell ${!isScrolled ? 'brightness-0 invert' : ''}`}><VPLogo /></a>
+        <div className="hidden xl:flex items-center gap-7">
+          {navLinks.map(([href, label]) => <a key={label} href={href} className={`whitespace-nowrap text-sm font-medium transition-colors ${isScrolled ? 'text-slate-600 hover:text-red-600' : 'text-slate-200 hover:text-white'}`}>{label}</a>)}
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle-btn px-3 py-2 rounded-lg border text-sm flex items-center gap-2"
+            style={!isScrolled ? { background: 'rgba(255,255,255,.1)', borderColor: 'rgba(255,255,255,.25)', color: '#fff' } : undefined}
+            aria-label="Toggle light and dark theme"
+          >
             <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
-            <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
-          <a href="/#contact" className="bg-red-600 text-white px-5 py-2.5 rounded text-xs font-black uppercase tracking-wider hover:bg-slate-950 transition-all flex items-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
+          <a href="/#contact" className="bg-red-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-red-700 transition-colors flex items-center gap-2">Request ERP Gap Assessment</a>
         </div>
-        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="xl:hidden text-slate-900 p-2 theme-toggle-btn">{mobileMenuOpen ? <SvgIcon name="X" /> : <SvgIcon name="Menu" />}</button>
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`xl:hidden p-2 theme-toggle-btn ${!isScrolled ? '!text-white' : 'text-slate-900'}`}>{mobileMenuOpen ? <SvgIcon name="X" /> : <SvgIcon name="Menu" />}</button>
       </div>
-      {mobileMenuOpen && <div className="xl:hidden bg-white border-t border-slate-100 px-6 py-6 shadow-xl flex flex-col gap-4 animate-fadeIn">
-        <button onClick={toggleTheme} className="theme-toggle-btn px-4 py-3 rounded-xl border text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2">
+      {mobileMenuOpen && <div className="xl:hidden bg-white border-t border-slate-100 px-6 py-6 shadow-md flex flex-col gap-4 animate-fadeIn">
+        <button onClick={toggleTheme} className="theme-toggle-btn px-4 py-3 rounded-lg border text-sm font-semibold flex items-center justify-center gap-2">
           <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
           <span>{theme === 'dark' ? 'Switch To Light Theme' : 'Switch To Dark Theme'}</span>
         </button>

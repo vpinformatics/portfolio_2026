@@ -58,10 +58,10 @@ export default function CaseStudyPage({ params }) {
       <SiteHeader />
       <main className="pt-32 pb-24 px-4">
         <div className="max-w-7xl mx-auto">
-          <nav aria-label="Breadcrumb" className="mb-8 text-xs font-bold uppercase tracking-widest text-slate-400">
-            <a href="/" className="hover:text-red-600">Home</a>
+          <nav aria-label="Breadcrumb" className="mb-8 text-sm text-slate-400">
+            <a href="/" className="hover:text-red-600 transition-colors">Home</a>
             <span className="mx-2">/</span>
-            <a href="/case-studies" className="hover:text-red-600">Case Studies</a>
+            <a href="/case-studies" className="hover:text-red-600 transition-colors">Case Studies</a>
             <span className="mx-2">/</span>
             <span className="text-slate-600">{project.label}</span>
           </nav>

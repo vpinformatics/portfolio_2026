@@ -5,27 +5,40 @@ import SvgIcon from './SvgIcon';
 import AnimatedSection from './AnimatedSection';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
+import Plate from './Plate';
+import SectionRail from './SectionRail';
 import { faqData, businessCards, portfolioSummary } from './siteData';
 
-function SectionLabel({ children }) {
-  return <span className="text-red-600 font-extrabold text-xs uppercase tracking-[0.22em] mb-3 block">{children}</span>;
+function SectionLabel({ children, dark }) {
+  return <Plate dark={dark} className="mb-4">{children}</Plate>;
 }
+
+const railSections = [
+  { id: 'continuity', label: 'Continuity Risk' },
+  { id: 'erp-gap', label: 'ERP Gap' },
+  { id: 'workflow', label: 'Before / After' },
+  { id: 'outcomes-fn', label: 'Outcomes' },
+  { id: 'reality', label: 'Reality Check' },
+  { id: 'solutions', label: 'Solutions' },
+  { id: 'portfolio', label: 'Portfolio' },
+  { id: 'process', label: 'Process' },
+];
 
 export default function App() {
   const heroSlides = [
     {
       kicker: 'Manufacturing Bottlenecks',
-      title: <>Eliminate Production Bottlenecks <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-slate-900 bg-[size:200%] animate-gradient">with Custom Software Systems</span></>,
+      title: <>Eliminate Production Bottlenecks <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-red-400 to-white bg-[size:200%] animate-gradient">with Custom Software Systems</span></>,
       copy: 'Reduce manual work, improve visibility, and streamline planning, inventory, quality control, dispatch, and operational workflows.',
     },
     {
       kicker: 'Operational Independence',
-      title: <>Convert Production Knowledge Into Systems <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-slate-900 bg-[size:200%] animate-gradient">That Keep Work Moving</span></>,
+      title: <>Convert Production Knowledge Into Systems <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-red-400 to-white bg-[size:200%] animate-gradient">That Keep Work Moving</span></>,
       copy: 'Reduce dependency on planners, supervisors, spreadsheets, and manual coordination by turning operational knowledge into scalable workflows and real-time visibility.',
     },
     {
       kicker: 'ERP Gap Visibility',
-      title: <>Most Factories Already Have Software. <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-slate-900 bg-[size:200%] animate-gradient">Few Have Operational Visibility.</span></>,
+      title: <>Most Factories Already Have Software. <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-red-400 to-white bg-[size:200%] animate-gradient">Few Have Operational Visibility.</span></>,
       copy: "We don't replace your ERP. We eliminate the gaps around it — planning spreadsheets, manual approvals, production blind spots, and dependency on key employees.",
     }
   ];
@@ -96,7 +109,6 @@ export default function App() {
     }
   };
 
-  const outcomes = ['8× Faster Planning', 'Up To 15% Material Savings', '99.8% Inventory Accuracy', 'Reduced Dependency On Key Personnel', 'Real-Time Production Visibility', 'Faster Dispatch Execution'];
   const portfolio = portfolioSummary;
   const questions = faqData;
 
@@ -104,268 +116,275 @@ export default function App() {
     <SiteHeader />
 
     <main>
-    <section id="home" className="pt-32 pb-12 md:pt-44 md:pb-20 px-4 relative overflow-hidden bg-gradient-to-b from-slate-50 via-slate-50/30 to-white">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
-      <div className="max-w-7xl mx-auto text-center relative z-10 min-h-[540px] flex flex-col justify-center">
-        <div className="inline-flex self-center items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-extrabold text-xs mb-8 tracking-widest uppercase">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span>
-          <span>{heroSlides[activeHero].kicker}</span>
-        </div>
+    <section id="home" className="pt-32 pb-20 md:pt-44 md:pb-28 px-4 relative overflow-hidden bg-slate-950">
+      <div className="absolute inset-0" aria-hidden="true">
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,#0A0E1A_0%,#0B1A33_35%,#0A0E1A_65%,#0A0E1A_100%)]"></div>
+        <div className="absolute top-[-16rem] left-[12%] w-[40rem] h-[34rem] rounded-[42%_58%_63%_37%/48%_42%_58%_52%] bg-red-500/25 blur-[100px]"></div>
+        <div className="absolute bottom-[-18rem] right-[8%] w-[36rem] h-[36rem] rounded-[58%_42%_46%_54%/54%_60%_40%_46%] bg-sky-400/20 blur-[110px]"></div>
+        <div className="absolute top-[8rem] right-[20%] w-[20rem] h-[18rem] rounded-[50%_50%_38%_62%/44%_56%_50%_50%] bg-emerald-400/10 blur-[90px]"></div>
+        <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full">
+          <g fill="none" stroke="#5FA8F5" strokeWidth="1.2" strokeLinecap="round" opacity="0.35">
+            <path d="M-40 540 C 140 480, 200 380, 130 290 S 40 150, 150 40" />
+            <path d="M130 290 C 250 310, 330 250, 390 140" />
+            <path d="M1480 60 C 1300 130, 1270 250, 1360 310 S 1470 470, 1330 570" />
+            <path d="M1360 310 C 1230 290, 1150 340, 1080 430" />
+            <path d="M700 -20 C 670 90, 720 160, 810 185 S 920 270, 870 360" />
+            <path d="M0 100 C 120 60, 260 90, 340 50" />
+            <path d="M1120 620 C 1220 560, 1240 480, 1180 430" />
+          </g>
+          <g fill="#8FC2FF" opacity="0.55">
+            <circle cx="-40" cy="540" r="4" /><circle cx="130" cy="290" r="5" /><circle cx="150" cy="40" r="3.5" />
+            <circle cx="390" cy="140" r="3.5" /><circle cx="1480" cy="60" r="4" /><circle cx="1360" cy="310" r="5" />
+            <circle cx="1330" cy="570" r="3.5" /><circle cx="1080" cy="430" r="3.5" /><circle cx="700" cy="-20" r="3.5" />
+            <circle cx="870" cy="360" r="4" /><circle cx="340" cy="50" r="3" /><circle cx="1180" cy="430" r="3.5" />
+          </g>
+        </svg>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,#ffffff10_1px,transparent_0)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_30%,#000_40%,transparent_100%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950"></div>
+      </div>
+      <div className="max-w-5xl mx-auto text-center relative z-10">
+        <Plate dark className="mb-6">{heroSlides[activeHero].kicker}</Plate>
         <div key={activeHero} className="animate-fadeIn">
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-950 mb-8 leading-none max-w-7xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-7 leading-[1.05] max-w-4xl mx-auto">
             {heroSlides[activeHero].title}
           </h1>
-          <p className="text-base sm:text-lg md:text-2xl text-slate-600 max-w-5xl mx-auto mb-10 leading-relaxed font-medium">
+          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-6 leading-relaxed">
             {heroSlides[activeHero].copy}
           </p>
         </div>
-        <p className="text-sm sm:text-base text-slate-500 font-bold max-w-3xl mx-auto mb-10">Most factories don't need another ERP. They need fewer manual decisions, less dependency on specific people, and better operational visibility.</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <a href="#contact" className="w-full sm:w-auto bg-red-600 text-white px-8 py-4 rounded font-extrabold text-sm uppercase tracking-widest hover:bg-slate-950 transition-all shadow-lg shadow-red-600/20 flex items-center justify-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
-          <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 hover:text-black hover:bg-slate-50 px-8 py-4 rounded text-sm font-extrabold uppercase tracking-widest transition-all shadow-sm">Schedule Strategy Consultation</a>
+        <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto mb-10">Most factories don't need another ERP. They need fewer manual decisions, less dependency on specific people, and better operational visibility.</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+          <a href="#contact" className="w-full sm:w-auto bg-red-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm hover:bg-red-500 transition-colors flex items-center justify-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
+          <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto text-slate-300 hover:text-white px-7 py-3.5 rounded-lg text-sm font-semibold transition-colors">Schedule Strategy Consultation →</a>
         </div>
-        <div className="flex items-center justify-center gap-3">
-          <button onClick={() => goHero(activeHero - 1)} className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 hover:text-red-600 hover:border-red-200 flex items-center justify-center"><SvgIcon name="ArrowLeft" className="w-4 h-4" /></button>
-          {heroSlides.map((_, idx) => <button key={idx} onClick={() => goHero(idx)} className={`w-2.5 h-2.5 rounded-full transition-all ${idx === activeHero ? 'bg-red-600 w-8' : 'bg-slate-300 hover:bg-slate-500'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
-          <button onClick={() => goHero(activeHero + 1)} className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 hover:text-red-600 hover:border-red-200 flex items-center justify-center"><SvgIcon name="ArrowRight" className="w-4 h-4" /></button>
+        <div className="flex items-center justify-center gap-2">
+          {heroSlides.map((_, idx) => <button key={idx} onClick={() => goHero(idx)} className={`h-1.5 rounded-full transition-all ${idx === activeHero ? 'bg-red-500 w-6' : 'bg-white/20 hover:bg-white/40 w-1.5'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
         </div>
       </div>
     </section>
 
-    <section id="outcomes" className="bg-white border-y border-slate-100 py-5 overflow-hidden marquee-wrap">
-      <div className="marquee-track items-center gap-8 text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-widest whitespace-nowrap">
-        {[0, 1].map(i => <div key={i} className="flex items-center gap-12 min-w-full justify-around">
-          {outcomes.map(o => <span key={o} className="flex items-center gap-2"><span className="text-red-600">✓</span>{o}</span>)}
-        </div>)}
-      </div>
-    </section>
+    <div className="max-w-7xl mx-auto px-4">
+      <div className="grid lg:grid-cols-[160px_1fr] gap-8 lg:gap-16">
+        <SectionRail sections={railSections} />
 
-    <section className="py-24 bg-slate-50 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <AnimatedSection className="lg:col-span-5">
-            <SectionLabel>Business Continuity Risk</SectionLabel>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-950 leading-tight mb-6">Your Operation Should Not Depend On Specific People.</h2>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-8">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-              <h3 className="text-lg font-black text-slate-950 mb-4">Roles that often become bottlenecks</h3>
-              <div className="grid grid-cols-2 gap-3 text-sm font-bold text-slate-600">
-                {['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head'].map(x => <div key={x} className="flex items-center gap-2"><span className="w-2 h-2 bg-red-600 rounded-full"></span>{x}</div>)}
-              </div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection className="lg:col-span-7" delay={100}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center mb-5"><SvgIcon name="Users" /></div>
-                <h3 className="text-xl font-black text-slate-950 mb-4">When knowledge lives in people</h3>
-                {['Questions need answers', 'Managers become bottlenecks', 'Production slows', 'Owner gets pulled into daily coordination', 'Growth stalls'].map(x => <p key={x} className="py-3 border-b border-slate-100 text-sm font-bold text-slate-600">× {x}</p>)}
-              </div>
-              <div className="bg-slate-950 text-white rounded-3xl p-7 shadow-2xl">
-                <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center mb-5"><SvgIcon name="Shield" /></div>
-                <h3 className="text-xl font-black mb-4">When knowledge lives in systems</h3>
-                {['Workflows continue', 'Decisions follow rules', 'Operations stay visible', 'Managers focus on improvement', 'Business becomes scalable'].map(x => <p key={x} className="py-3 border-b border-white/10 text-sm font-bold text-slate-200">✓ {x}</p>)}
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </div>
-    </section>
-
-    <section className="py-20 bg-white border-b border-slate-100">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="bg-slate-950 text-white rounded-3xl p-8 md:p-12 grid md:grid-cols-12 gap-10 items-center shadow-2xl">
-          <div className="md:col-span-7">
-            <SectionLabel>ERP Gap Assessment</SectionLabel>
-            <h2 className="text-3xl md:text-5xl font-black mb-5 leading-tight">Most factories already have software. The real question is what still happens outside it?</h2>
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed font-medium">Why are planning, approvals, inventory checks, production tracking, and dispatch still happening in spreadsheets, WhatsApp, phone calls, or inside specific people's heads?</p>
-          </div>
-          <div className="md:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-6">
-            {['Spreadsheet dependencies', 'Manual approvals', 'Production visibility gaps', 'Key-person bottlenecks', 'Duplicate data entry', 'Missing automation opportunities'].map(x => <div key={x} className="flex items-center gap-3 py-3 border-b border-white/10 last:border-0 text-sm font-bold text-slate-200"><span className="text-red-300">✓</span>{x}</div>)}
-            <a href="#contact" className="mt-6 bg-red-600 hover:bg-white hover:text-slate-950 text-white px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2">Request ERP Gap Assessment</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section className="py-24 bg-white border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <SectionLabel>Before / After Workflow</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">From People-Driven Operations to System-Driven Operations</h2>
-          <p className="text-slate-600 text-base md:text-lg font-medium">Factory owners understand flows. This is the difference between coordination dependency and scalable operating discipline.</p>
-        </div>
-        <div className="grid lg:grid-cols-2 gap-8">
-          <AnimatedSection>
-            <div className="bg-slate-50 rounded-3xl border border-slate-200 p-8 h-full">
-              <h3 className="text-2xl font-black text-slate-900 mb-6">Before VP Informatics</h3>
-              {['Production Manager', 'Production Planning', 'Inventory Verification', 'Quality Approval', 'Dispatch Planning', 'Shipment Release'].map((x, i) => <div key={x} className="text-center"><div className="bg-white border border-slate-200 rounded-xl py-3 px-4 font-extrabold text-slate-700 shadow-sm">{x}</div>{i < 5 && <div className="text-slate-400 text-2xl my-2">↓</div>}</div>)}
-              <div className="mt-8 space-y-3 text-sm font-bold text-slate-600">{['Planning waits for specific people', 'Knowledge lives in individuals', 'Visibility depends on phone calls', 'Decisions are difficult to scale'].map(x => <div key={x}>× {x}</div>)}</div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={100}>
-            <div className="bg-slate-950 text-white rounded-3xl p-8 h-full shadow-2xl">
-              <h3 className="text-2xl font-black mb-6">After VP Informatics</h3>
-              {['System Rules', 'Automated Planning', 'Inventory Validation', 'Quality Gate', 'Dispatch Automation', 'Shipment Release'].map((x, i) => <div key={x} className="text-center"><div className="bg-white text-red-600 rounded-xl py-3 px-4 font-extrabold shadow-sm">{x}</div>{i < 5 && <div className="text-red-300 text-2xl my-2">↓</div>}</div>)}
-              <div className="mt-8 space-y-3 text-sm font-bold text-slate-200">{['Consistent operational decisions', 'Reduced dependency on key personnel', 'Faster planning and approvals', 'Managers focus on improvement'].map(x => <div key={x}>✓ {x}</div>)}</div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </div>
-    </section>
-
-    <section className="py-24 bg-slate-50 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <SectionLabel>Customised Software. Measured ROI. Built For Growth.</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Customised Software Designed Around Business Outcomes.</h2>
-          <p className="text-slate-600 text-base md:text-lg font-medium">Every engagement starts with an operational bottleneck and ends with a measurable business outcome.</p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {businessCards.map((c, idx) => <AnimatedSection key={c.title} delay={idx * 60}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="text-4xl mb-4">{c.icon}</div>
-              <h3 className="text-xl font-black text-slate-950 mb-5">{c.title}</h3>
-              <div className="space-y-5 flex-grow">
-                <div><div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Problem</div><p className="text-sm text-slate-600 font-semibold leading-relaxed">{c.problem}</p></div>
-                <div><div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Solution</div><p className="text-sm text-slate-600 font-semibold leading-relaxed">{c.solution}</p></div>
-                <div className="bg-slate-950 text-white rounded-2xl p-5"><div className="text-[10px] font-black uppercase tracking-widest text-red-300 mb-2">Outcome</div><div className="text-2xl font-black">{c.outcome}</div></div>
-              </div>
-              <div className="pt-5 mt-5 border-t border-slate-100 space-y-2">{c.points.map(p => <div key={p} className="text-sm font-bold text-slate-700">✓ {p}</div>)}</div>
-            </div>
-          </AnimatedSection>)}
-        </div>
-      </div>
-    </section>
-
-    <section className="py-24 bg-white border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5">
-            <SectionLabel>ERP + Excel + Custom</SectionLabel>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-6">Most Factories Already Have Software.</h2>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-6">The challenge isn't buying another system. The challenge is eliminating the gaps between people, spreadsheets, and existing software.</p>
-            <blockquote className="border-l-4 border-red-600 pl-5 text-xl font-black text-slate-950">We don't replace your ERP. We eliminate the operational gaps around it.</blockquote>
-          </div>
-          <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-7">
-              <h3 className="text-xl font-black text-slate-950 mb-5">Current Reality</h3>
-              {['Planning in Excel', 'Manual approvals', 'Phone-call follow-ups', 'Knowledge in people', 'ERP + spreadsheets', 'Reactive decisions'].map(x => <div key={x} className="py-3 border-b border-slate-200 text-sm font-bold text-slate-600">× {x}</div>)}
-            </div>
-            <div className="bg-slate-950 text-white rounded-3xl p-7 shadow-2xl">
-              <h3 className="text-xl font-black mb-5">Desired Reality</h3>
-              {['Planning inside workflows', 'Automated quality gates', 'Real-time visibility', 'Knowledge in systems', 'Unified operations', 'Predictive visibility'].map(x => <div key={x} className="py-3 border-b border-white/10 text-sm font-bold text-slate-200">✓ {x}</div>)}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="solutions" className="py-24 bg-slate-50 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <SectionLabel>Solutions</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Organized Around Why Customers Buy.</h2>
-          <p className="text-slate-600 text-base md:text-lg font-medium">Technology is supporting evidence. The real value is operational control, continuity, and visibility.</p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            ['Remove Operational Bottlenecks', 'Production planning, approvals, dispatch, inventory movement, costing, and workflow automation.', ['Faster planning', 'Reduced manual coordination', 'Better throughput'], 'Custom Software • Workflow Engines • Dashboards'],
-            ['Reduce Dependency On Key Personnel', 'Convert operational knowledge into repeatable systems so production continues even when key employees are unavailable.', ['Less dependency on planners', 'Consistent decision-making', 'Faster onboarding'], 'Rules Engines • Approval Flows • Role-Based Systems'],
-            ['Improve Production Visibility', 'Real-time dashboards, forecasting, alerts, machine monitoring, and operational reporting.', ['Earlier bottleneck detection', 'Faster management decisions', 'Better production visibility'], 'Industrial IoT • AI Automation • Reporting']
-          ].map((s, idx) => <AnimatedSection key={s[0]} delay={idx * 100}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-6"><SvgIcon name={idx === 0 ? 'Zap' : idx === 1 ? 'Users' : 'Activity'} /></div>
-              <h3 className="text-2xl font-black text-slate-950 mb-4">{s[0]}</h3>
-              <p className="text-sm text-slate-600 font-semibold leading-relaxed mb-6">{s[1]}</p>
-              <div className="space-y-2 mb-8 flex-grow">{s[2].map(p => <div key={p} className="text-sm font-bold text-slate-700">✓ {p}</div>)}</div>
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Powered by<br />
-                <span className="text-slate-900">{s[3]}</span></div>
-            </div>
-          </AnimatedSection>)}
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio" className="py-24 bg-white border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <SectionLabel>Portfolio / Case Studies</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Industry → Problem → Outcome.</h2>
-          <p className="text-slate-600 text-base md:text-lg font-medium">Project pages are organized around real manufacturing workflows, operational risk, system solution, before/after flow, and measurable business value.</p>
-        </div>
-        <div className="grid md:grid-cols-2 gap-8">
-          {portfolio.map((group, idx) => <AnimatedSection key={group.id} delay={idx * 80}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="flex-grow">
-                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-red-600 mb-3">Project Page</div>
-                <h3 className="text-2xl font-black text-slate-950 mb-3">{group.industry}</h3>
-                <p className="text-sm font-bold text-slate-600 leading-relaxed mb-5">{group.headline}</p>
-                <div className="bg-slate-950 text-white rounded-2xl p-5 mb-6">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-red-300 mb-2">Primary Outcome</div>
-                  <div className="text-xl font-black">{group.outcome}</div>
+        <div>
+          <section id="continuity" className="py-20">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              <AnimatedSection className="lg:col-span-5">
+                <SectionLabel>Business Continuity Risk</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-950 leading-tight mb-6">Your Operation Should Not Depend On Specific People.</h2>
+                <p className="text-slate-600 text-base leading-relaxed mb-8">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
+                <div className="bg-slate-50 rounded-2xl p-6">
+                  <h3 className="text-sm font-semibold text-slate-950 mb-4">Roles that often become bottlenecks</h3>
+                  <div className="grid grid-cols-2 gap-3 text-sm text-slate-600">
+                    {['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head'].map(x => <div key={x} className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>{x}</div>)}
+                  </div>
                 </div>
-                <div className="space-y-3">{group.items.map(([name, outcome]) => <div key={name} className="bg-slate-50 border border-slate-100 rounded-2xl p-4"><div className="font-black text-slate-950">{name}</div><div className="text-sm font-bold text-red-600 mt-1">{outcome}</div></div>)}</div>
-              </div>
-              <a href={`/case-studies/${group.id}`} className="mt-6 inline-flex items-center justify-center bg-red-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-950 transition-all">View Project Page <SvgIcon name="ArrowRight" className="w-4 h-4 ml-2" /></a>
+              </AnimatedSection>
+              <AnimatedSection className="lg:col-span-7" delay={100}>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-white rounded-2xl p-7 shadow-sm">
+                    <div className="w-11 h-11 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center mb-5"><SvgIcon name="Users" className="w-5 h-5" /></div>
+                    <h3 className="text-base font-semibold text-slate-950 mb-4">When knowledge lives in people</h3>
+                    <div className="divide-y divide-slate-100">{['Questions need answers', 'Managers become bottlenecks', 'Production slows', 'Owner gets pulled into daily coordination', 'Growth stalls'].map(x => <p key={x} className="py-2.5 text-sm text-slate-600">{x}</p>)}</div>
+                  </div>
+                  <div className="bg-slate-950 text-white rounded-2xl p-7 shadow-sm">
+                    <div className="w-11 h-11 rounded-xl bg-white/10 text-red-400 flex items-center justify-center mb-5"><SvgIcon name="Shield" className="w-5 h-5" /></div>
+                    <h3 className="text-base font-semibold mb-4">When knowledge lives in systems</h3>
+                    <div className="divide-y divide-white/10">{['Workflows continue', 'Decisions follow rules', 'Operations stay visible', 'Managers focus on improvement', 'Business becomes scalable'].map(x => <p key={x} className="py-2.5 text-sm text-slate-300">{x}</p>)}</div>
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
-          </AnimatedSection>)}
-        </div>
-      </div>
-    </section>
+          </section>
 
-    <section id="process" className="py-24 bg-slate-50 border-b border-slate-100">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          <div className="lg:col-span-4 sticky top-28">
-            <SectionLabel>Process</SectionLabel>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">How We Reduce Operational Risk.</h2>
-            <p className="text-slate-600 text-base md:text-lg font-medium">A calm, transparent process focused on workflows, dependencies, visibility, and handover.</p>
-          </div>
-          <div className="lg:col-span-8 space-y-6">
-            {[
-              ['01', 'Operational Discovery', 'We understand planning workflows, approvals, inventory movement, reporting requirements, and production dependencies.'],
-              ['02', 'Workflow Architecture', 'We identify bottlenecks, ERP gaps, spreadsheet dependencies, and automation opportunities.'],
-              ['03', 'Implementation & Validation', 'Solutions are deployed alongside existing operations and validated with actual users and production scenarios.'],
-              ['04', 'Operational Handover', 'Documentation, training, ownership transfer, and long-term scalability planning.']
-            ].map((p, idx) => <AnimatedSection key={p[0]} delay={idx * 80}>
-              <div className="bg-white border border-slate-200 rounded-3xl p-7 shadow-sm flex gap-6">
-                <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex-shrink-0 flex items-center justify-center text-lg font-black">{p[0]}</div>
-                <div><h3 className="text-xl font-black text-slate-950 mb-2">{p[1]}</h3><p className="text-sm md:text-base text-slate-600 font-semibold leading-relaxed">{p[2]}</p></div>
+          <section id="erp-gap" className="py-20">
+            <div className="bg-slate-950 text-white rounded-2xl p-8 md:p-12 grid md:grid-cols-12 gap-10 items-center">
+              <div className="md:col-span-7">
+                <SectionLabel dark>ERP Gap Assessment</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold mb-5 leading-tight">Most factories already have software. The real question is what still happens outside it?</h2>
+                <p className="text-slate-300 text-base leading-relaxed">Why are planning, approvals, inventory checks, production tracking, and dispatch still happening in spreadsheets, WhatsApp, phone calls, or inside specific people's heads?</p>
               </div>
-            </AnimatedSection>)}
-          </div>
+              <div className="md:col-span-5">
+                <div className="divide-y divide-white/10 mb-6">
+                  {['Spreadsheet dependencies', 'Manual approvals', 'Production visibility gaps', 'Key-person bottlenecks', 'Duplicate data entry', 'Missing automation opportunities'].map(x => <div key={x} className="flex items-center gap-3 py-2.5 text-sm text-slate-200"><span className="w-1 h-1 rounded-full bg-red-400"></span>{x}</div>)}
+                </div>
+                <a href="#contact" className="bg-red-600 hover:bg-red-500 text-white px-6 py-3.5 rounded-lg font-semibold text-sm transition-colors flex items-center justify-center gap-2">Request ERP Gap Assessment</a>
+              </div>
+            </div>
+          </section>
+
+          <section id="workflow" className="py-20">
+            <SectionLabel>Before / After Workflow</SectionLabel>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-4 max-w-xl">From People-Driven Operations to System-Driven Operations</h2>
+            <p className="text-slate-600 text-base mb-12 max-w-xl">Factory owners understand flows. This is the difference between coordination dependency and scalable operating discipline.</p>
+            <div className="grid lg:grid-cols-2 gap-8">
+              <AnimatedSection>
+                <div className="bg-slate-50 rounded-2xl p-8 h-full">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-6">Before VP Informatics</h3>
+                  <div className="relative pl-6 border-l-2 border-slate-200 space-y-5 mb-8">
+                    {['Production Manager', 'Production Planning', 'Inventory Verification', 'Quality Approval', 'Dispatch Planning', 'Shipment Release'].map(x => <div key={x} className="relative text-sm font-medium text-slate-700"><span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-slate-300"></span>{x}</div>)}
+                  </div>
+                  <div className="space-y-2 text-sm text-slate-500">{['Planning waits for specific people', 'Knowledge lives in individuals', 'Visibility depends on phone calls', 'Decisions are difficult to scale'].map(x => <div key={x}>— {x}</div>)}</div>
+                </div>
+              </AnimatedSection>
+              <AnimatedSection delay={100}>
+                <div className="bg-slate-950 text-white rounded-2xl p-8 h-full">
+                  <h3 className="text-lg font-semibold mb-6">After VP Informatics</h3>
+                  <div className="relative pl-6 border-l-2 border-white/15 space-y-5 mb-8">
+                    {['System Rules', 'Automated Planning', 'Inventory Validation', 'Quality Gate', 'Dispatch Automation', 'Shipment Release'].map(x => <div key={x} className="relative text-sm font-medium text-slate-100"><span className="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>{x}</div>)}
+                  </div>
+                  <div className="space-y-2 text-sm text-slate-400">{['Consistent operational decisions', 'Reduced dependency on key personnel', 'Faster planning and approvals', 'Managers focus on improvement'].map(x => <div key={x}>— {x}</div>)}</div>
+                </div>
+              </AnimatedSection>
+            </div>
+          </section>
+
+          <section id="outcomes-fn" className="py-20">
+            <SectionLabel>Function → Outcome</SectionLabel>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-4 max-w-xl">Customised Software Designed Around Business Outcomes.</h2>
+            <p className="text-slate-600 text-base mb-12 max-w-xl">Every engagement starts with an operational bottleneck and ends with a measurable business outcome.</p>
+            <div className="divide-y divide-slate-100">
+              {businessCards.map((c, idx) => <AnimatedSection key={c.title} delay={idx * 50}>
+                <div className="py-8 grid md:grid-cols-12 gap-4 md:gap-8 items-start">
+                  <div className="md:col-span-4 flex items-start gap-4">
+                    <span className="text-2xl leading-none">{c.icon}</span>
+                    <div>
+                      <h3 className="text-base font-semibold text-slate-950">{c.title}</h3>
+                      <p className="text-sm text-slate-500 mt-1">{c.problem}</p>
+                    </div>
+                  </div>
+                  <div className="md:col-span-5">
+                    <p className="text-sm text-slate-600 leading-relaxed">{c.solution}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">{c.points.map(p => <span key={p} className="text-xs text-slate-500">{p}</span>)}</div>
+                  </div>
+                  <div className="md:col-span-3 md:text-right">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-red-600 mb-1">Outcome</div>
+                    <div className="text-lg font-bold text-slate-950">{c.outcome}</div>
+                  </div>
+                </div>
+              </AnimatedSection>)}
+            </div>
+          </section>
+
+          <section id="reality" className="py-20">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-5">
+                <SectionLabel>ERP + Excel + Custom</SectionLabel>
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-6">Most Factories Already Have Software.</h2>
+                <p className="text-slate-600 text-base leading-relaxed mb-6">The challenge isn't buying another system. The challenge is eliminating the gaps between people, spreadsheets, and existing software.</p>
+                <blockquote className="border-l-2 border-red-600 pl-5 text-lg font-semibold text-slate-950">We don't replace your ERP. We eliminate the operational gaps around it.</blockquote>
+              </div>
+              <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
+                <div className="bg-slate-50 rounded-2xl p-7">
+                  <h3 className="text-base font-semibold text-slate-950 mb-5">Current Reality</h3>
+                  <div className="divide-y divide-slate-200">{['Planning in Excel', 'Manual approvals', 'Phone-call follow-ups', 'Knowledge in people', 'ERP + spreadsheets', 'Reactive decisions'].map(x => <div key={x} className="py-2.5 text-sm text-slate-600">{x}</div>)}</div>
+                </div>
+                <div className="bg-slate-950 text-white rounded-2xl p-7">
+                  <h3 className="text-base font-semibold mb-5">Desired Reality</h3>
+                  <div className="divide-y divide-white/10">{['Planning inside workflows', 'Automated quality gates', 'Real-time visibility', 'Knowledge in systems', 'Unified operations', 'Predictive visibility'].map(x => <div key={x} className="py-2.5 text-sm text-slate-300">{x}</div>)}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="solutions" className="py-20">
+            <SectionLabel>Solutions</SectionLabel>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-4 max-w-xl">Organized Around Why Customers Buy.</h2>
+            <p className="text-slate-600 text-base mb-12 max-w-xl">Technology is supporting evidence. The real value is operational control, continuity, and visibility.</p>
+            <div className="divide-y divide-slate-100">
+              {[
+                ['Remove Operational Bottlenecks', 'Production planning, approvals, dispatch, inventory movement, costing, and workflow automation.', ['Faster planning', 'Reduced manual coordination', 'Better throughput'], 'Custom Software · Workflow Engines · Dashboards', 'Zap'],
+                ['Reduce Dependency On Key Personnel', 'Convert operational knowledge into repeatable systems so production continues even when key employees are unavailable.', ['Less dependency on planners', 'Consistent decision-making', 'Faster onboarding'], 'Rules Engines · Approval Flows · Role-Based Systems', 'Users'],
+                ['Improve Production Visibility', 'Real-time dashboards, forecasting, alerts, machine monitoring, and operational reporting.', ['Earlier bottleneck detection', 'Faster management decisions', 'Better production visibility'], 'Industrial IoT · AI Automation · Reporting', 'Activity']
+              ].map((s, idx) => <AnimatedSection key={s[0]} delay={idx * 80}>
+                <div className="py-8 grid md:grid-cols-12 gap-4 md:gap-8 items-start">
+                  <div className="md:col-span-4 flex items-start gap-4">
+                    <div className="w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center flex-shrink-0"><SvgIcon name={s[4]} className="w-5 h-5" /></div>
+                    <h3 className="text-base font-semibold text-slate-950">{s[0]}</h3>
+                  </div>
+                  <div className="md:col-span-5">
+                    <p className="text-sm text-slate-600 leading-relaxed mb-2">{s[1]}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">{s[2].map(p => <span key={p} className="text-xs text-slate-500">{p}</span>)}</div>
+                  </div>
+                  <div className="md:col-span-3 md:text-right text-xs text-slate-400">{s[3]}</div>
+                </div>
+              </AnimatedSection>)}
+            </div>
+          </section>
+
+          <section id="portfolio" className="py-20">
+            <SectionLabel>Portfolio / Case Studies</SectionLabel>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-4 max-w-xl">Industry → Problem → Outcome.</h2>
+            <p className="text-slate-600 text-base mb-12 max-w-xl">Project pages are organized around real manufacturing workflows, operational risk, system solution, before/after flow, and measurable business value.</p>
+            <div className="divide-y divide-slate-100 border-t border-b border-slate-100">
+              {portfolio.map((group, idx) => <AnimatedSection key={group.id} delay={idx * 60}>
+                <a href={`/case-studies/${group.id}`} className="group flex flex-col md:flex-row md:items-center gap-3 md:gap-8 py-7 hover:bg-slate-50 -mx-4 px-4 rounded-xl transition-colors">
+                  <span className="font-mono text-sm text-slate-300 md:w-10 flex-shrink-0">{String(idx + 1).padStart(2, '0')}</span>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-slate-950 group-hover:text-red-600 transition-colors">{group.industry}</h3>
+                    <p className="text-sm text-slate-500 mt-1">{group.headline}</p>
+                  </div>
+                  <div className="md:w-56 flex-shrink-0">
+                    <div className="text-sm font-semibold text-red-600">{group.outcome}</div>
+                  </div>
+                  <SvgIcon name="ArrowRight" className="w-5 h-5 text-slate-300 group-hover:text-red-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                </a>
+              </AnimatedSection>)}
+            </div>
+          </section>
+
+          <section id="process" className="py-20">
+            <SectionLabel>Process</SectionLabel>
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-4 max-w-xl">How We Reduce Operational Risk.</h2>
+            <p className="text-slate-600 text-base mb-12 max-w-xl">A calm, transparent process focused on workflows, dependencies, visibility, and handover.</p>
+            <div className="relative pl-10 border-l-2 border-slate-200 space-y-10">
+              {[
+                ['01', 'Operational Discovery', 'We understand planning workflows, approvals, inventory movement, reporting requirements, and production dependencies.'],
+                ['02', 'Workflow Architecture', 'We identify bottlenecks, ERP gaps, spreadsheet dependencies, and automation opportunities.'],
+                ['03', 'Implementation & Validation', 'Solutions are deployed alongside existing operations and validated with actual users and production scenarios.'],
+                ['04', 'Operational Handover', 'Documentation, training, ownership transfer, and long-term scalability planning.']
+              ].map((p, idx) => <AnimatedSection key={p[0]} delay={idx * 80}>
+                <div className="relative">
+                  <span className="absolute -left-[45px] top-0.5 w-4 h-4 rounded-full bg-white border-2 border-red-600"></span>
+                  <div className="text-sm font-bold text-red-600 mb-1">{p[0]}</div>
+                  <h3 className="text-base font-semibold text-slate-950 mb-2">{p[1]}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed">{p[2]}</p>
+                </div>
+              </AnimatedSection>)}
+            </div>
+          </section>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="decision" className="py-24 bg-white border-b border-slate-100">
+    <section id="decision" className="py-24 bg-slate-50 mt-8">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-16">
           <SectionLabel>Project Decision Framework</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Are We The Right Fit?</h2>
-          <p className="text-slate-600 text-base md:text-lg font-medium">This section qualifies serious buyers and builds trust before the first call.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-950 mb-5">Are We The Right Fit?</h2>
+          <p className="text-slate-600 text-base md:text-lg">A quick self-check before you reach out — so the first call is worth both our time.</p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white border border-slate-200 border-t-4 border-t-emerald-500 rounded-3xl p-8 shadow-sm">
-            <h3 className="text-2xl font-black text-slate-950 mb-6">When We're The Right Fit</h3>
-            {['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
-              <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="CheckCircle2" className="w-3.5 h-3.5" /></span>
+        <div className="grid lg:grid-cols-2 gap-6 mb-12">
+          <div className="bg-white rounded-2xl p-8 shadow-sm">
+            <h3 className="text-lg font-semibold text-emerald-700 mb-6">When We're The Right Fit</h3>
+            <div className="divide-y divide-slate-100">{['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 flex items-start gap-3 text-sm text-slate-700">
+              <SvgIcon name="CheckCircle2" className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
               {x}
-            </div>)}
+            </div>)}</div>
           </div>
-          <div className="bg-white border border-slate-200 border-t-4 border-t-red-500 rounded-3xl p-8 shadow-sm">
-            <h3 className="text-2xl font-black text-slate-950 mb-6">When We're Probably Not The Right Fit</h3>
-            {['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
-              <span className="w-5 h-5 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="X" className="w-3.5 h-3.5" /></span>
+          <div className="bg-white rounded-2xl p-8 shadow-sm">
+            <h3 className="text-lg font-semibold text-danger-600 mb-6">When We're Probably Not The Right Fit</h3>
+            <div className="divide-y divide-slate-100">{['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 flex items-start gap-3 text-sm text-slate-700">
+              <SvgIcon name="X" className="w-4 h-4 text-danger-500 flex-shrink-0 mt-0.5" />
               {x}
-            </div>)}
+            </div>)}</div>
           </div>
         </div>
-        <div className="max-w-4xl mx-auto space-y-4">
-          {questions.map((q, idx) => <div key={q[0]} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-            <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full px-6 py-5 text-left flex justify-between items-center gap-4"><span className="font-black text-slate-950">{q[0]}</span><span className="text-red-600 font-black">{activeFaq === idx ? '−' : '+'}</span></button>
-            {activeFaq === idx && <div className="px-6 pb-6 text-slate-600 font-medium leading-relaxed">{q[1]}</div>}
+        <div className="max-w-3xl mx-auto divide-y divide-slate-200">
+          {questions.map((q, idx) => <div key={q[0]}>
+            <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full py-5 text-left flex justify-between items-center gap-4"><span className="font-semibold text-slate-950">{q[0]}</span><span className="text-red-600 font-bold text-lg">{activeFaq === idx ? '−' : '+'}</span></button>
+            {activeFaq === idx && <div className="pb-5 text-slate-600 leading-relaxed">{q[1]}</div>}
           </div>)}
         </div>
       </div>
@@ -375,35 +394,35 @@ export default function App() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
-            <span className="text-red-300 font-extrabold text-xs uppercase tracking-[0.22em] mb-3 block">Final CTA</span>
-            <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">Request ERP Gap Assessment.</h2>
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed font-medium mb-8">Discover where production planning, approvals, inventory visibility, dispatch, and operational decisions still depend on spreadsheets, workarounds, and key personnel.</p>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-3">
-              {['Workflow Review', 'ERP Gap Identification', 'Dependency Risk Analysis', 'Automation Opportunities', 'Recommended Roadmap'].map(x => <div key={x} className="text-sm font-bold text-slate-200">✓ {x}</div>)}
+            <Plate dark className="mb-4">Start Here</Plate>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">Request ERP Gap Assessment.</h2>
+            <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8">Discover where production planning, approvals, inventory visibility, dispatch, and operational decisions still depend on spreadsheets, workarounds, and key personnel.</p>
+            <div className="divide-y divide-white/10">
+              {['Workflow Review', 'ERP Gap Identification', 'Dependency Risk Analysis', 'Automation Opportunities', 'Recommended Roadmap'].map(x => <div key={x} className="py-2.5 text-sm text-slate-200">{x}</div>)}
             </div>
           </div>
-          <div className="lg:col-span-7 bg-white text-slate-900 rounded-3xl p-7 md:p-10 shadow-2xl">
-            {formSubmitted ? <div className="text-center py-16"><div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5"><SvgIcon name="CheckCircle2" className="w-8 h-8" /></div><h3 className="text-2xl font-black mb-2">Assessment request received.</h3><p className="text-slate-600 font-medium">We'll review your details and respond within 1 business day.</p></div> : <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
-                <input name="name" value={formData.name} onChange={handleInput} required placeholder="Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input name="company" value={formData.company} onChange={handleInput} placeholder="Company" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input name="phone" value={formData.phone} onChange={handleInput} placeholder="Phone" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input type="email" name="email" value={formData.email} onChange={handleInput} required placeholder="Email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
+          <div className="lg:col-span-7 bg-white text-slate-900 rounded-2xl p-7 md:p-10 shadow-xl">
+            {formSubmitted ? <div className="text-center py-16"><div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5"><SvgIcon name="CheckCircle2" className="w-7 h-7" /></div><h3 className="text-xl font-semibold mb-2">Assessment request received.</h3><p className="text-slate-600">We'll review your details and respond within 1 business day.</p></div> : <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input name="name" value={formData.name} onChange={handleInput} required placeholder="Name" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400" />
+                <input name="company" value={formData.company} onChange={handleInput} placeholder="Company" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400" />
+                <input name="phone" value={formData.phone} onChange={handleInput} placeholder="Phone" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400" />
+                <input type="email" name="email" value={formData.email} onChange={handleInput} required placeholder="Email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400" />
               </div>
-              <select name="challenge" value={formData.challenge} onChange={handleInput} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300">
+              <select name="challenge" value={formData.challenge} onChange={handleInput} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400">
                 {['Production Planning', 'Inventory Visibility', 'Quality Control', 'Dispatch Management', 'ERP Limitations', 'Dependency On Key Personnel', 'Other'].map(x => <option key={x}>{x}</option>)}
               </select>
-              <textarea name="message" value={formData.message} onChange={handleInput} rows="5" placeholder="Briefly describe your workflow challenge" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300"></textarea>
+              <textarea name="message" value={formData.message} onChange={handleInput} rows="4" placeholder="Briefly describe your workflow challenge" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3.5 outline-none focus:border-red-400"></textarea>
               <input type="text" name="website" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] w-px h-px opacity-0" />
               <div className="flex items-center gap-3">
-                <label htmlFor="captcha" className="font-semibold text-sm text-slate-700 whitespace-nowrap">What is {captcha.a} + {captcha.b}?</label>
-                <input id="captcha" type="text" inputMode="numeric" value={captchaAnswer} onChange={e => setCaptchaAnswer(e.target.value)} required placeholder="Answer" className="w-28 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-semibold outline-none focus:border-red-300" />
+                <label htmlFor="captcha" className="text-sm text-slate-600 whitespace-nowrap">What is {captcha.a} + {captcha.b}?</label>
+                <input id="captcha" type="text" inputMode="numeric" value={captchaAnswer} onChange={e => setCaptchaAnswer(e.target.value)} required placeholder="Answer" className="w-24 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-red-400" />
               </div>
-              {captchaError && <p className="text-red-600 text-sm font-bold">That answer isn't right — please try the new sum.</p>}
-              {formError && <p className="text-red-600 text-sm font-bold">Something went wrong sending your request. Please try again or email us directly.</p>}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button type="submit" disabled={formSubmitting} className="flex-1 bg-red-600 text-white hover:bg-slate-950 px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all disabled:opacity-60 disabled:cursor-not-allowed">{formSubmitting ? 'Sending…' : 'Submit'}</button>
-                <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="flex-1 border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center">Schedule Strategy Consultation</a>
+              {captchaError && <p className="text-danger-600 text-sm">That answer isn't right — please try the new sum.</p>}
+              {formError && <p className="text-danger-600 text-sm">Something went wrong sending your request. Please try again or email us directly.</p>}
+              <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                <button type="submit" disabled={formSubmitting} className="flex-1 bg-red-600 text-white hover:bg-red-700 px-6 py-3.5 rounded-lg font-semibold text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed">{formSubmitting ? 'Sending…' : 'Submit'}</button>
+                <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="flex-1 border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-3.5 rounded-lg font-semibold text-sm transition-colors text-center">Schedule Strategy Consultation</a>
               </div>
             </form>}
           </div>

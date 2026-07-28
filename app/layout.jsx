@@ -1,18 +1,18 @@
-import { Manrope, Sora } from 'next/font/google';
+import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import { siteUrl, orgData } from '../components/siteData';
 import Analytics from '../components/Analytics';
 
-const manrope = Manrope({
+const plexSans = IBM_Plex_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
-  variable: '--font-manrope',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex-sans',
   display: 'swap',
 });
-const sora = Sora({
+const plexMono = IBM_Plex_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-sora',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex-mono',
   display: 'swap',
 });
 
@@ -81,7 +81,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${sora.variable}`}>
+    <html lang="en" className={`${plexSans.variable} ${plexMono.variable}`}>
       <body className="bg-white text-slate-800 antialiased selection:bg-red-100 selection:text-red-900">
         {children}
         <Analytics />

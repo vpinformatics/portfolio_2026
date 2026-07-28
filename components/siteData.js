@@ -12,7 +12,7 @@ export const orgData = {
 };
 
 export const navLinks = [
-  ['/#outcomes', 'Outcomes'],
+  ['/#outcomes-fn', 'Outcomes'],
   ['/#solutions', 'Solutions'],
   ['/#portfolio', 'Case Studies'],
   ['/#process', 'Process'],
