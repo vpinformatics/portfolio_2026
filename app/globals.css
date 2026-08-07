@@ -135,6 +135,13 @@ body.theme-light .theme-toggle-btn{
 .theme-toggle-btn{transition:all .25s ease;}
 .theme-toggle-btn:hover{transform:translateY(-1px);}
 
+/* Floating RAG chat widget */
+.vp-chat{border-color:#0F172A;}
+body.theme-dark .vp-chat{border-color:#334155!important;}
+body.theme-dark .vp-chat input,
+body.theme-dark .vp-chat textarea{background:transparent!important;border-color:#334155!important;}
+body.theme-dark .vp-chat .bg-slate-50{background-color:#0B1220!important;}
+
 .logo-shell{
   padding:6px 10px;
   border-radius:16px;

@@ -2,6 +2,8 @@ import { Manrope, Sora } from 'next/font/google';
 import './globals.css';
 import { siteUrl, orgData } from '../components/siteData';
 import Analytics from '../components/Analytics';
+import ChatWidget from '../components/ChatWidget';
+import WhatsAppButton from '../components/WhatsAppButton';
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -84,6 +86,8 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${manrope.variable} ${sora.variable}`}>
       <body className="bg-white text-slate-800 antialiased selection:bg-red-100 selection:text-red-900">
         {children}
+        <WhatsAppButton />
+        <ChatWidget />
         <Analytics />
       </body>
     </html>
