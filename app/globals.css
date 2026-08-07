@@ -14,6 +14,24 @@ html{scroll-behavior:smooth;}
 .marquee-track{display:flex;width:200%;animation:marquee 30s linear infinite;}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
 
+/* Blueprint / work-order schematic system (homepage) */
+.tag-clip{clip-path:polygon(3% 0,100% 0,100% 100%,3% 100%,0 50%);}
+.blueprint-grid{
+  background-image:
+    linear-gradient(to right,rgba(15,23,42,.05) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(15,23,42,.05) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+body.theme-dark .blueprint-grid{
+  background-image:
+    linear-gradient(to right,rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.05) 1px,transparent 1px);
+}
+.corner-mark{position:relative;}
+.corner-mark::before,.corner-mark::after{content:'';position:absolute;width:16px;height:16px;pointer-events:none;}
+.corner-mark::before{top:-6px;left:-6px;border-top:2px solid currentColor;border-left:2px solid currentColor;}
+.corner-mark::after{bottom:-6px;right:-6px;border-bottom:2px solid currentColor;border-right:2px solid currentColor;}
+
 
 /* Theme System: premium light + layered industrial dark */
 :root{

@@ -7,8 +7,25 @@ import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import { faqData, businessCards, portfolioSummary } from './siteData';
 
-function SectionLabel({ children }) {
-  return <span className="text-red-600 font-extrabold text-xs uppercase tracking-[0.22em] mb-3 block">{children}</span>;
+function SectionLabel({ children, dark }) {
+  return (
+    <span className={`tag-clip inline-flex items-center pl-4 pr-3 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] mb-5 ${dark ? 'bg-red-600 text-white' : 'bg-slate-950 text-white'}`}>
+      {children}
+    </span>
+  );
+}
+
+function Ledger({ items, tone = 'muted', mark = '×' }) {
+  return (
+    <div>
+      {items.map((x, i) => (
+        <div key={x} className={`flex items-baseline gap-3 py-3 border-b border-slate-200 text-sm font-bold ${tone === 'muted' ? 'text-slate-500' : 'text-slate-900'}`}>
+          <span className={tone === 'muted' ? 'text-slate-400' : 'text-red-600'}>{mark}</span>
+          <span>{x}</span>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function App() {
@@ -104,12 +121,12 @@ export default function App() {
     <SiteHeader />
 
     <main>
-    <section id="home" className="pt-32 pb-12 md:pt-44 md:pb-20 px-4 relative overflow-hidden bg-gradient-to-b from-slate-50 via-slate-50/30 to-white">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000005_1px,transparent_1px),linear-gradient(to_bottom,#00000005_1px,transparent_1px)] bg-[size:30px_30px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)]"></div>
-      <div className="max-w-7xl mx-auto text-center relative z-10 min-h-[540px] flex flex-col justify-center">
-        <div className="inline-flex self-center items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 font-extrabold text-xs mb-8 tracking-widest uppercase">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse"></span>
-          <span>{heroSlides[activeHero].kicker}</span>
+    <section id="home" className="pt-32 pb-16 md:pt-48 md:pb-24 px-4 relative overflow-hidden bg-white blueprint-grid">
+      <div className="max-w-7xl mx-auto text-center relative z-10 min-h-[540px] flex flex-col justify-center corner-mark text-slate-200 py-10">
+        <div className="text-slate-800">
+        <div className="inline-flex self-center items-center gap-3 mb-8">
+          <span className="w-2 h-2 bg-red-600 animate-pulse"></span>
+          <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-slate-500 border-b border-slate-300 pb-1">{heroSlides[activeHero].kicker}</span>
         </div>
         <div key={activeHero} className="animate-fadeIn">
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-950 mb-8 leading-none max-w-7xl mx-auto">
@@ -120,14 +137,15 @@ export default function App() {
           </p>
         </div>
         <p className="text-sm sm:text-base text-slate-500 font-bold max-w-3xl mx-auto mb-10">Most factories don't need another ERP. They need fewer manual decisions, less dependency on specific people, and better operational visibility.</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-          <a href="#contact" className="w-full sm:w-auto bg-red-600 text-white px-8 py-4 rounded font-extrabold text-sm uppercase tracking-widest hover:bg-slate-950 transition-all shadow-lg shadow-red-600/20 flex items-center justify-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
-          <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-white border border-slate-200 text-slate-700 hover:text-black hover:bg-slate-50 px-8 py-4 rounded text-sm font-extrabold uppercase tracking-widest transition-all shadow-sm">Schedule Strategy Consultation</a>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
+          <a href="#contact" className="w-full sm:w-auto bg-red-600 text-white px-8 py-4 font-extrabold text-sm uppercase tracking-widest hover:bg-slate-950 transition-all flex items-center justify-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
+          <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-slate-700 hover:text-red-600 px-1 py-2 text-sm font-extrabold uppercase tracking-widest border-b-2 border-slate-300 hover:border-red-600 transition-all">Schedule Strategy Consultation</a>
         </div>
-        <div className="flex items-center justify-center gap-3">
-          <button onClick={() => goHero(activeHero - 1)} className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 hover:text-red-600 hover:border-red-200 flex items-center justify-center"><SvgIcon name="ArrowLeft" className="w-4 h-4" /></button>
-          {heroSlides.map((_, idx) => <button key={idx} onClick={() => goHero(idx)} className={`w-2.5 h-2.5 rounded-full transition-all ${idx === activeHero ? 'bg-red-600 w-8' : 'bg-slate-300 hover:bg-slate-500'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
-          <button onClick={() => goHero(activeHero + 1)} className="w-10 h-10 rounded-full border border-slate-200 bg-white text-slate-500 hover:text-red-600 hover:border-red-200 flex items-center justify-center"><SvgIcon name="ArrowRight" className="w-4 h-4" /></button>
+        <div className="flex items-center justify-center gap-4">
+          <button onClick={() => goHero(activeHero - 1)} className="text-slate-400 hover:text-red-600 transition-colors font-black text-lg" aria-label="Previous slide">‹</button>
+          {heroSlides.map((_, idx) => <button key={idx} onClick={() => goHero(idx)} className={`h-1 transition-all ${idx === activeHero ? 'bg-red-600 w-10' : 'bg-slate-300 hover:bg-slate-500 w-4'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
+          <button onClick={() => goHero(activeHero + 1)} className="text-slate-400 hover:text-red-600 transition-colors font-black text-lg" aria-label="Next slide">›</button>
+        </div>
         </div>
       </div>
     </section>
@@ -142,29 +160,25 @@ export default function App() {
 
     <section className="py-24 bg-slate-50 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
           <AnimatedSection className="lg:col-span-5">
             <SectionLabel>Business Continuity Risk</SectionLabel>
             <h2 className="text-3xl md:text-5xl font-black text-slate-950 leading-tight mb-6">Your Operation Should Not Depend On Specific People.</h2>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-8">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-              <h3 className="text-lg font-black text-slate-950 mb-4">Roles that often become bottlenecks</h3>
-              <div className="grid grid-cols-2 gap-3 text-sm font-bold text-slate-600">
-                {['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head'].map(x => <div key={x} className="flex items-center gap-2"><span className="w-2 h-2 bg-red-600 rounded-full"></span>{x}</div>)}
-              </div>
-            </div>
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-10">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2 border-t-2 border-slate-950 pt-4">Roles that often become bottlenecks</h3>
+            <Ledger items={['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head']} mark="—" />
           </AnimatedSection>
           <AnimatedSection className="lg:col-span-7" delay={100}>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm">
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-600 flex items-center justify-center mb-5"><SvgIcon name="Users" /></div>
+            <div className="grid md:grid-cols-2 md:divide-x md:divide-dashed md:divide-slate-300">
+              <div className="md:pr-10 pb-10 md:pb-0">
+                <SvgIcon name="Users" className="w-6 h-6 text-slate-400 mb-4" />
                 <h3 className="text-xl font-black text-slate-950 mb-4">When knowledge lives in people</h3>
-                {['Questions need answers', 'Managers become bottlenecks', 'Production slows', 'Owner gets pulled into daily coordination', 'Growth stalls'].map(x => <p key={x} className="py-3 border-b border-slate-100 text-sm font-bold text-slate-600">× {x}</p>)}
+                <Ledger items={['Questions need answers', 'Managers become bottlenecks', 'Production slows', 'Owner gets pulled into daily coordination', 'Growth stalls']} tone="muted" mark="×" />
               </div>
-              <div className="bg-slate-950 text-white rounded-3xl p-7 shadow-2xl">
-                <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center mb-5"><SvgIcon name="Shield" /></div>
-                <h3 className="text-xl font-black mb-4">When knowledge lives in systems</h3>
-                {['Workflows continue', 'Decisions follow rules', 'Operations stay visible', 'Managers focus on improvement', 'Business becomes scalable'].map(x => <p key={x} className="py-3 border-b border-white/10 text-sm font-bold text-slate-200">✓ {x}</p>)}
+              <div className="md:pl-10">
+                <SvgIcon name="Shield" className="w-6 h-6 text-red-600 mb-4" />
+                <h3 className="text-xl font-black text-slate-950 mb-4">When knowledge lives in systems</h3>
+                <Ledger items={['Workflows continue', 'Decisions follow rules', 'Operations stay visible', 'Managers focus on improvement', 'Business becomes scalable']} tone="strong" mark="→" />
               </div>
             </div>
           </AnimatedSection>
@@ -172,17 +186,17 @@ export default function App() {
       </div>
     </section>
 
-    <section className="py-20 bg-white border-b border-slate-100">
+    <section className="py-24 bg-slate-950 text-white border-b border-slate-900">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="bg-slate-950 text-white rounded-3xl p-8 md:p-12 grid md:grid-cols-12 gap-10 items-center shadow-2xl">
+        <div className="grid md:grid-cols-12 gap-10 items-start">
           <div className="md:col-span-7">
-            <SectionLabel>ERP Gap Assessment</SectionLabel>
+            <SectionLabel dark>ERP Gap Assessment</SectionLabel>
             <h2 className="text-3xl md:text-5xl font-black mb-5 leading-tight">Most factories already have software. The real question is what still happens outside it?</h2>
             <p className="text-slate-300 text-base md:text-lg leading-relaxed font-medium">Why are planning, approvals, inventory checks, production tracking, and dispatch still happening in spreadsheets, WhatsApp, phone calls, or inside specific people's heads?</p>
           </div>
-          <div className="md:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-6">
-            {['Spreadsheet dependencies', 'Manual approvals', 'Production visibility gaps', 'Key-person bottlenecks', 'Duplicate data entry', 'Missing automation opportunities'].map(x => <div key={x} className="flex items-center gap-3 py-3 border-b border-white/10 last:border-0 text-sm font-bold text-slate-200"><span className="text-red-300">✓</span>{x}</div>)}
-            <a href="#contact" className="mt-6 bg-red-600 hover:bg-white hover:text-slate-950 text-white px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2">Request ERP Gap Assessment</a>
+          <div className="md:col-span-5 border-t-2 border-white/20 pt-2">
+            {['Spreadsheet dependencies', 'Manual approvals', 'Production visibility gaps', 'Key-person bottlenecks', 'Duplicate data entry', 'Missing automation opportunities'].map(x => <div key={x} className="flex items-center gap-3 py-3 border-b border-white/10 text-sm font-bold text-slate-200"><span className="text-red-400">✕</span>{x}</div>)}
+            <a href="#contact" className="mt-8 inline-flex items-center gap-2 text-white hover:text-red-400 px-1 py-2 font-black text-xs uppercase tracking-widest border-b-2 border-white/40 hover:border-red-400 transition-all">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
           </div>
         </div>
       </div>
@@ -195,19 +209,23 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">From People-Driven Operations to System-Driven Operations</h2>
           <p className="text-slate-600 text-base md:text-lg font-medium">Factory owners understand flows. This is the difference between coordination dependency and scalable operating discipline.</p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-0 lg:divide-x lg:divide-dashed lg:divide-slate-300">
           <AnimatedSection>
-            <div className="bg-slate-50 rounded-3xl border border-slate-200 p-8 h-full">
-              <h3 className="text-2xl font-black text-slate-900 mb-6">Before VP Informatics</h3>
-              {['Production Manager', 'Production Planning', 'Inventory Verification', 'Quality Approval', 'Dispatch Planning', 'Shipment Release'].map((x, i) => <div key={x} className="text-center"><div className="bg-white border border-slate-200 rounded-xl py-3 px-4 font-extrabold text-slate-700 shadow-sm">{x}</div>{i < 5 && <div className="text-slate-400 text-2xl my-2">↓</div>}</div>)}
-              <div className="mt-8 space-y-3 text-sm font-bold text-slate-600">{['Planning waits for specific people', 'Knowledge lives in individuals', 'Visibility depends on phone calls', 'Decisions are difficult to scale'].map(x => <div key={x}>× {x}</div>)}</div>
+            <div className="lg:pr-12">
+              <h3 className="text-2xl font-black text-slate-900 mb-8">Before VP Informatics</h3>
+              <div className="border-l-2 border-slate-300 pl-6 space-y-5">
+                {['Production Manager', 'Production Planning', 'Inventory Verification', 'Quality Approval', 'Dispatch Planning', 'Shipment Release'].map((x) => <div key={x} className="relative"><span className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-slate-300"></span><p className="font-extrabold text-slate-700">{x}</p></div>)}
+              </div>
+              <div className="mt-10 space-y-3 text-sm font-bold text-slate-500 border-t border-slate-200 pt-6">{['Planning waits for specific people', 'Knowledge lives in individuals', 'Visibility depends on phone calls', 'Decisions are difficult to scale'].map(x => <div key={x}>× {x}</div>)}</div>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <div className="bg-slate-950 text-white rounded-3xl p-8 h-full shadow-2xl">
-              <h3 className="text-2xl font-black mb-6">After VP Informatics</h3>
-              {['System Rules', 'Automated Planning', 'Inventory Validation', 'Quality Gate', 'Dispatch Automation', 'Shipment Release'].map((x, i) => <div key={x} className="text-center"><div className="bg-white text-red-600 rounded-xl py-3 px-4 font-extrabold shadow-sm">{x}</div>{i < 5 && <div className="text-red-300 text-2xl my-2">↓</div>}</div>)}
-              <div className="mt-8 space-y-3 text-sm font-bold text-slate-200">{['Consistent operational decisions', 'Reduced dependency on key personnel', 'Faster planning and approvals', 'Managers focus on improvement'].map(x => <div key={x}>✓ {x}</div>)}</div>
+            <div className="lg:pl-12">
+              <h3 className="text-2xl font-black text-slate-950 mb-8">After VP Informatics</h3>
+              <div className="border-l-2 border-red-600 pl-6 space-y-5">
+                {['System Rules', 'Automated Planning', 'Inventory Validation', 'Quality Gate', 'Dispatch Automation', 'Shipment Release'].map((x) => <div key={x} className="relative"><span className="absolute -left-[27px] top-1.5 w-2.5 h-2.5 bg-red-600"></span><p className="font-extrabold text-slate-950">{x}</p></div>)}
+              </div>
+              <div className="mt-10 space-y-3 text-sm font-bold text-slate-700 border-t border-slate-200 pt-6">{['Consistent operational decisions', 'Reduced dependency on key personnel', 'Faster planning and approvals', 'Managers focus on improvement'].map(x => <div key={x}>→ {x}</div>)}</div>
             </div>
           </AnimatedSection>
         </div>
@@ -221,17 +239,25 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Customised Software Designed Around Business Outcomes.</h2>
           <p className="text-slate-600 text-base md:text-lg font-medium">Every engagement starts with an operational bottleneck and ends with a measurable business outcome.</p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {businessCards.map((c, idx) => <AnimatedSection key={c.title} delay={idx * 60}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="text-4xl mb-4">{c.icon}</div>
-              <h3 className="text-xl font-black text-slate-950 mb-5">{c.title}</h3>
-              <div className="space-y-5 flex-grow">
+        <div className="border-t-2 border-slate-950">
+          {businessCards.map((c, idx) => <AnimatedSection key={c.title} delay={idx * 50}>
+            <div className="grid md:grid-cols-12 gap-6 py-10 border-b border-slate-200 items-start">
+              <div className="md:col-span-3 flex items-start gap-4">
+                <span className="font-mono text-xs text-slate-400 pt-1">{String(idx + 1).padStart(2, '0')}</span>
+                <div>
+                  <span className="text-2xl block mb-2">{c.icon}</span>
+                  <h3 className="text-lg font-black text-slate-950 leading-tight">{c.title}</h3>
+                </div>
+              </div>
+              <div className="md:col-span-6 grid sm:grid-cols-2 gap-6">
                 <div><div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Problem</div><p className="text-sm text-slate-600 font-semibold leading-relaxed">{c.problem}</p></div>
                 <div><div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Solution</div><p className="text-sm text-slate-600 font-semibold leading-relaxed">{c.solution}</p></div>
-                <div className="bg-slate-950 text-white rounded-2xl p-5"><div className="text-[10px] font-black uppercase tracking-widest text-red-300 mb-2">Outcome</div><div className="text-2xl font-black">{c.outcome}</div></div>
               </div>
-              <div className="pt-5 mt-5 border-t border-slate-100 space-y-2">{c.points.map(p => <div key={p} className="text-sm font-bold text-slate-700">✓ {p}</div>)}</div>
+              <div className="md:col-span-3 md:text-right md:border-l md:border-slate-200 md:pl-6">
+                <div className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-1">Outcome</div>
+                <div className="text-xl font-black text-slate-950 mb-3">{c.outcome}</div>
+                <div className="space-y-1">{c.points.map(p => <div key={p} className="text-xs font-bold text-slate-500">→ {p}</div>)}</div>
+              </div>
             </div>
           </AnimatedSection>)}
         </div>
@@ -247,14 +273,14 @@ export default function App() {
             <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-6">The challenge isn't buying another system. The challenge is eliminating the gaps between people, spreadsheets, and existing software.</p>
             <blockquote className="border-l-4 border-red-600 pl-5 text-xl font-black text-slate-950">We don't replace your ERP. We eliminate the operational gaps around it.</blockquote>
           </div>
-          <div className="lg:col-span-7 grid md:grid-cols-2 gap-6">
-            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-7">
+          <div className="lg:col-span-7 grid md:grid-cols-2 md:divide-x md:divide-dashed md:divide-slate-300">
+            <div className="md:pr-10 pb-8 md:pb-0">
               <h3 className="text-xl font-black text-slate-950 mb-5">Current Reality</h3>
-              {['Planning in Excel', 'Manual approvals', 'Phone-call follow-ups', 'Knowledge in people', 'ERP + spreadsheets', 'Reactive decisions'].map(x => <div key={x} className="py-3 border-b border-slate-200 text-sm font-bold text-slate-600">× {x}</div>)}
+              <Ledger items={['Planning in Excel', 'Manual approvals', 'Phone-call follow-ups', 'Knowledge in people', 'ERP + spreadsheets', 'Reactive decisions']} tone="muted" mark="×" />
             </div>
-            <div className="bg-slate-950 text-white rounded-3xl p-7 shadow-2xl">
-              <h3 className="text-xl font-black mb-5">Desired Reality</h3>
-              {['Planning inside workflows', 'Automated quality gates', 'Real-time visibility', 'Knowledge in systems', 'Unified operations', 'Predictive visibility'].map(x => <div key={x} className="py-3 border-b border-white/10 text-sm font-bold text-slate-200">✓ {x}</div>)}
+            <div className="md:pl-10">
+              <h3 className="text-xl font-black text-slate-950 mb-5">Desired Reality</h3>
+              <Ledger items={['Planning inside workflows', 'Automated quality gates', 'Real-time visibility', 'Knowledge in systems', 'Unified operations', 'Predictive visibility']} tone="strong" mark="→" />
             </div>
           </div>
         </div>
@@ -268,18 +294,19 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Organized Around Why Customers Buy.</h2>
           <p className="text-slate-600 text-base md:text-lg font-medium">Technology is supporting evidence. The real value is operational control, continuity, and visibility.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 md:divide-x md:divide-dashed md:divide-slate-300 border-t-2 border-slate-950">
           {[
             ['Remove Operational Bottlenecks', 'Production planning, approvals, dispatch, inventory movement, costing, and workflow automation.', ['Faster planning', 'Reduced manual coordination', 'Better throughput'], 'Custom Software • Workflow Engines • Dashboards'],
             ['Reduce Dependency On Key Personnel', 'Convert operational knowledge into repeatable systems so production continues even when key employees are unavailable.', ['Less dependency on planners', 'Consistent decision-making', 'Faster onboarding'], 'Rules Engines • Approval Flows • Role-Based Systems'],
             ['Improve Production Visibility', 'Real-time dashboards, forecasting, alerts, machine monitoring, and operational reporting.', ['Earlier bottleneck detection', 'Faster management decisions', 'Better production visibility'], 'Industrial IoT • AI Automation • Reporting']
           ].map((s, idx) => <AnimatedSection key={s[0]} delay={idx * 100}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-6"><SvgIcon name={idx === 0 ? 'Zap' : idx === 1 ? 'Users' : 'Activity'} /></div>
+            <div className={`pt-10 h-full flex flex-col ${idx === 0 ? '' : 'md:pl-10'} ${idx === 2 ? '' : 'md:pr-10'}`}>
+              <span className="font-mono text-xs text-slate-400 mb-4 block">{String(idx + 1).padStart(2, '0')}</span>
+              <SvgIcon name={idx === 0 ? 'Zap' : idx === 1 ? 'Users' : 'Activity'} className="w-8 h-8 text-red-600 mb-6" />
               <h3 className="text-2xl font-black text-slate-950 mb-4">{s[0]}</h3>
               <p className="text-sm text-slate-600 font-semibold leading-relaxed mb-6">{s[1]}</p>
-              <div className="space-y-2 mb-8 flex-grow">{s[2].map(p => <div key={p} className="text-sm font-bold text-slate-700">✓ {p}</div>)}</div>
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-[10px] font-black uppercase tracking-widest text-slate-500">Powered by<br />
+              <div className="space-y-2 mb-8 flex-grow border-t border-slate-200 pt-4">{s[2].map(p => <div key={p} className="text-sm font-bold text-slate-700">→ {p}</div>)}</div>
+              <div className="text-[10px] font-black uppercase tracking-widest text-slate-400">Powered by<br />
                 <span className="text-slate-900">{s[3]}</span></div>
             </div>
           </AnimatedSection>)}
@@ -294,21 +321,23 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Industry → Problem → Outcome.</h2>
           <p className="text-slate-600 text-base md:text-lg font-medium">Project pages are organized around real manufacturing workflows, operational risk, system solution, before/after flow, and measurable business value.</p>
         </div>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="border-t-2 border-slate-950">
           {portfolio.map((group, idx) => <AnimatedSection key={group.id} delay={idx * 80}>
-            <div className="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-xl hover:border-red-200 transition-all h-full flex flex-col">
-              <div className="flex-grow">
-                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-red-600 mb-3">Project Page</div>
-                <h3 className="text-2xl font-black text-slate-950 mb-3">{group.industry}</h3>
-                <p className="text-sm font-bold text-slate-600 leading-relaxed mb-5">{group.headline}</p>
-                <div className="bg-slate-950 text-white rounded-2xl p-5 mb-6">
-                  <div className="text-[10px] font-black uppercase tracking-widest text-red-300 mb-2">Primary Outcome</div>
-                  <div className="text-xl font-black">{group.outcome}</div>
-                </div>
-                <div className="space-y-3">{group.items.map(([name, outcome]) => <div key={name} className="bg-slate-50 border border-slate-100 rounded-2xl p-4"><div className="font-black text-slate-950">{name}</div><div className="text-sm font-bold text-red-600 mt-1">{outcome}</div></div>)}</div>
+            <a href={`/case-studies/${group.id}`} className="group grid md:grid-cols-12 gap-4 md:gap-6 py-10 border-b border-slate-200 items-start -mx-4 px-4 hover:bg-slate-50 transition-colors">
+              <div className="md:col-span-2 font-mono text-xs text-slate-400 pt-1">DWG-0{idx + 1}</div>
+              <div className="md:col-span-5">
+                <h3 className="text-2xl font-black text-slate-950 mb-2 group-hover:text-red-600 transition-colors">{group.industry}</h3>
+                <p className="text-sm font-bold text-slate-600 leading-relaxed">{group.headline}</p>
               </div>
-              <a href={`/case-studies/${group.id}`} className="mt-6 inline-flex items-center justify-center bg-red-600 text-white px-5 py-3 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-950 transition-all">View Project Page <SvgIcon name="ArrowRight" className="w-4 h-4 ml-2" /></a>
-            </div>
+              <div className="md:col-span-2">
+                <div className="text-[10px] font-black uppercase tracking-widest text-red-600 mb-1">Outcome</div>
+                <div className="text-sm font-black text-slate-950 leading-tight">{group.outcome}</div>
+              </div>
+              <div className="md:col-span-3 space-y-1.5">{group.items.map(([name, outcome]) => <div key={name} className="text-xs font-bold text-slate-500">{name} <span className="text-slate-300">/</span> <span className="text-slate-700">{outcome}</span></div>)}</div>
+              <div className="md:col-span-12 mt-3">
+                <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-950 group-hover:text-red-600 border-b-2 border-slate-950 group-hover:border-red-600 pb-1 transition-colors">View Project Page <SvgIcon name="ArrowRight" className="w-4 h-4" /></span>
+              </div>
+            </a>
           </AnimatedSection>)}
         </div>
       </div>
@@ -322,15 +351,15 @@ export default function App() {
             <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">How We Reduce Operational Risk.</h2>
             <p className="text-slate-600 text-base md:text-lg font-medium">A calm, transparent process focused on workflows, dependencies, visibility, and handover.</p>
           </div>
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 border-t-2 border-slate-950">
             {[
               ['01', 'Operational Discovery', 'We understand planning workflows, approvals, inventory movement, reporting requirements, and production dependencies.'],
               ['02', 'Workflow Architecture', 'We identify bottlenecks, ERP gaps, spreadsheet dependencies, and automation opportunities.'],
               ['03', 'Implementation & Validation', 'Solutions are deployed alongside existing operations and validated with actual users and production scenarios.'],
               ['04', 'Operational Handover', 'Documentation, training, ownership transfer, and long-term scalability planning.']
             ].map((p, idx) => <AnimatedSection key={p[0]} delay={idx * 80}>
-              <div className="bg-white border border-slate-200 rounded-3xl p-7 shadow-sm flex gap-6">
-                <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex-shrink-0 flex items-center justify-center text-lg font-black">{p[0]}</div>
+              <div className="flex gap-8 py-8 border-b border-slate-200 items-start">
+                <div className="text-5xl md:text-6xl font-black text-slate-200 leading-none flex-shrink-0">{p[0]}</div>
                 <div><h3 className="text-xl font-black text-slate-950 mb-2">{p[1]}</h3><p className="text-sm md:text-base text-slate-600 font-semibold leading-relaxed">{p[2]}</p></div>
               </div>
             </AnimatedSection>)}
@@ -346,26 +375,26 @@ export default function App() {
           <h2 className="text-3xl md:text-5xl font-black text-slate-950 mb-5">Are We The Right Fit?</h2>
           <p className="text-slate-600 text-base md:text-lg font-medium">This section qualifies serious buyers and builds trust before the first call.</p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white border border-slate-200 border-t-4 border-t-emerald-500 rounded-3xl p-8 shadow-sm">
+        <div className="grid lg:grid-cols-2 lg:divide-x lg:divide-dashed lg:divide-slate-300 mb-16 border-t-2 border-slate-950">
+          <div className="pt-10 lg:pr-12 pb-10 lg:pb-0">
             <h3 className="text-2xl font-black text-slate-950 mb-6">When We're The Right Fit</h3>
-            {['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
-              <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="CheckCircle2" className="w-3.5 h-3.5" /></span>
+            {['Planning still depends on spreadsheets', 'Operational knowledge lives in specific people', 'Existing ERP requires workarounds', 'Production visibility is limited', 'Manual coordination slows execution', 'Management wants measurable improvements'].map(x => <div key={x} className="py-3 border-b border-slate-200 flex items-start gap-3 text-sm font-bold text-slate-700">
+              <span className="text-emerald-600 flex-shrink-0">✓</span>
               {x}
             </div>)}
           </div>
-          <div className="bg-white border border-slate-200 border-t-4 border-t-red-500 rounded-3xl p-8 shadow-sm">
+          <div className="pt-10 lg:pl-12">
             <h3 className="text-2xl font-black text-slate-950 mb-6">When We're Probably Not The Right Fit</h3>
-            {['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 border-b border-slate-100 last:border-b-0 flex items-start gap-3 text-sm font-bold text-slate-700">
-              <span className="w-5 h-5 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0 mt-0.5"><SvgIcon name="X" className="w-3.5 h-3.5" /></span>
+            {['Looking for the cheapest vendor', 'Need only a marketing website', 'Existing software already solves the operational problem', 'Business processes change every week', 'No operational bottlenecks exist'].map(x => <div key={x} className="py-3 border-b border-slate-200 flex items-start gap-3 text-sm font-bold text-slate-700">
+              <span className="text-red-600 flex-shrink-0">✕</span>
               {x}
             </div>)}
           </div>
         </div>
-        <div className="max-w-4xl mx-auto space-y-4">
-          {questions.map((q, idx) => <div key={q[0]} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-            <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full px-6 py-5 text-left flex justify-between items-center gap-4"><span className="font-black text-slate-950">{q[0]}</span><span className="text-red-600 font-black">{activeFaq === idx ? '−' : '+'}</span></button>
-            {activeFaq === idx && <div className="px-6 pb-6 text-slate-600 font-medium leading-relaxed">{q[1]}</div>}
+        <div className="max-w-4xl mx-auto border-t-2 border-slate-950">
+          {questions.map((q, idx) => <div key={q[0]} className="border-b border-slate-200">
+            <button onClick={() => setActiveFaq(activeFaq === idx ? null : idx)} className="w-full py-5 text-left flex justify-between items-center gap-4"><span className="font-black text-slate-950">{q[0]}</span><span className="text-red-600 font-black text-lg">{activeFaq === idx ? '−' : '+'}</span></button>
+            {activeFaq === idx && <div className="pb-6 text-slate-600 font-medium leading-relaxed">{q[1]}</div>}
           </div>)}
         </div>
       </div>
@@ -375,35 +404,35 @@ export default function App() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5">
-            <span className="text-red-300 font-extrabold text-xs uppercase tracking-[0.22em] mb-3 block">Final CTA</span>
+            <span className="tag-clip inline-flex items-center pl-4 pr-3 py-1.5 bg-red-600 text-white text-[11px] font-black uppercase tracking-[0.22em] mb-5">Final CTA</span>
             <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">Request ERP Gap Assessment.</h2>
             <p className="text-slate-300 text-base md:text-lg leading-relaxed font-medium mb-8">Discover where production planning, approvals, inventory visibility, dispatch, and operational decisions still depend on spreadsheets, workarounds, and key personnel.</p>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-3">
-              {['Workflow Review', 'ERP Gap Identification', 'Dependency Risk Analysis', 'Automation Opportunities', 'Recommended Roadmap'].map(x => <div key={x} className="text-sm font-bold text-slate-200">✓ {x}</div>)}
+            <div className="border-t-2 border-white/20 pt-2">
+              {['Workflow Review', 'ERP Gap Identification', 'Dependency Risk Analysis', 'Automation Opportunities', 'Recommended Roadmap'].map(x => <div key={x} className="flex items-center gap-3 py-3 border-b border-white/10 text-sm font-bold text-slate-200"><span className="text-red-400">✓</span>{x}</div>)}
             </div>
           </div>
-          <div className="lg:col-span-7 bg-white text-slate-900 rounded-3xl p-7 md:p-10 shadow-2xl">
-            {formSubmitted ? <div className="text-center py-16"><div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5"><SvgIcon name="CheckCircle2" className="w-8 h-8" /></div><h3 className="text-2xl font-black mb-2">Assessment request received.</h3><p className="text-slate-600 font-medium">We'll review your details and respond within 1 business day.</p></div> : <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
-                <input name="name" value={formData.name} onChange={handleInput} required placeholder="Name" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input name="company" value={formData.company} onChange={handleInput} placeholder="Company" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input name="phone" value={formData.phone} onChange={handleInput} placeholder="Phone" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
-                <input type="email" name="email" value={formData.email} onChange={handleInput} required placeholder="Email" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300" />
+          <div className="lg:col-span-7 lg:pl-12 lg:border-l lg:border-dashed lg:border-white/20">
+            {formSubmitted ? <div className="py-16"><div className="text-emerald-400 mb-5"><SvgIcon name="CheckCircle2" className="w-10 h-10" /></div><h3 className="text-2xl font-black mb-2">Assessment request received.</h3><p className="text-slate-300 font-medium">We'll review your details and respond within 1 business day.</p></div> : <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <input name="name" value={formData.name} onChange={handleInput} required placeholder="Name" className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors" />
+                <input name="company" value={formData.company} onChange={handleInput} placeholder="Company" className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors" />
+                <input name="phone" value={formData.phone} onChange={handleInput} placeholder="Phone" className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors" />
+                <input type="email" name="email" value={formData.email} onChange={handleInput} required placeholder="Email" className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors" />
               </div>
-              <select name="challenge" value={formData.challenge} onChange={handleInput} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300">
-                {['Production Planning', 'Inventory Visibility', 'Quality Control', 'Dispatch Management', 'ERP Limitations', 'Dependency On Key Personnel', 'Other'].map(x => <option key={x}>{x}</option>)}
+              <select name="challenge" value={formData.challenge} onChange={handleInput} className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white outline-none focus:border-red-500 transition-colors">
+                {['Production Planning', 'Inventory Visibility', 'Quality Control', 'Dispatch Management', 'ERP Limitations', 'Dependency On Key Personnel', 'Other'].map(x => <option key={x} className="text-slate-900">{x}</option>)}
               </select>
-              <textarea name="message" value={formData.message} onChange={handleInput} rows="5" placeholder="Briefly describe your workflow challenge" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 font-semibold outline-none focus:border-red-300"></textarea>
+              <textarea name="message" value={formData.message} onChange={handleInput} rows="4" placeholder="Briefly describe your workflow challenge" className="w-full bg-transparent border-b-2 border-white/20 px-1 py-3 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors"></textarea>
               <input type="text" name="website" value={honeypot} onChange={e => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] w-px h-px opacity-0" />
               <div className="flex items-center gap-3">
-                <label htmlFor="captcha" className="font-semibold text-sm text-slate-700 whitespace-nowrap">What is {captcha.a} + {captcha.b}?</label>
-                <input id="captcha" type="text" inputMode="numeric" value={captchaAnswer} onChange={e => setCaptchaAnswer(e.target.value)} required placeholder="Answer" className="w-28 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-semibold outline-none focus:border-red-300" />
+                <label htmlFor="captcha" className="font-semibold text-sm text-slate-300 whitespace-nowrap">What is {captcha.a} + {captcha.b}?</label>
+                <input id="captcha" type="text" inputMode="numeric" value={captchaAnswer} onChange={e => setCaptchaAnswer(e.target.value)} required placeholder="Answer" className="w-24 bg-transparent border-b-2 border-white/20 px-1 py-2 font-semibold text-white placeholder-slate-500 outline-none focus:border-red-500 transition-colors" />
               </div>
-              {captchaError && <p className="text-red-600 text-sm font-bold">That answer isn't right — please try the new sum.</p>}
-              {formError && <p className="text-red-600 text-sm font-bold">Something went wrong sending your request. Please try again or email us directly.</p>}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button type="submit" disabled={formSubmitting} className="flex-1 bg-red-600 text-white hover:bg-slate-950 px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all disabled:opacity-60 disabled:cursor-not-allowed">{formSubmitting ? 'Sending…' : 'Submit'}</button>
-                <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="flex-1 border border-slate-200 text-slate-700 hover:bg-slate-50 px-6 py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-all text-center">Schedule Strategy Consultation</a>
+              {captchaError && <p className="text-red-400 text-sm font-bold">That answer isn't right — please try the new sum.</p>}
+              {formError && <p className="text-red-400 text-sm font-bold">Something went wrong sending your request. Please try again or email us directly.</p>}
+              <div className="flex flex-col sm:flex-row gap-6 items-center pt-2">
+                <button type="submit" disabled={formSubmitting} className="w-full sm:w-auto bg-red-600 text-white hover:bg-white hover:text-slate-950 px-8 py-4 font-black text-xs uppercase tracking-widest transition-all disabled:opacity-60 disabled:cursor-not-allowed">{formSubmitting ? 'Sending…' : 'Submit'}</button>
+                <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white font-black text-xs uppercase tracking-widest border-b-2 border-white/30 hover:border-white pb-1 transition-all">Schedule Strategy Consultation</a>
               </div>
             </form>}
           </div>
