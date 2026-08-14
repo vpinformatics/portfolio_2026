@@ -15,6 +15,7 @@ export const navLinks = [
   ['/#outcomes', 'Outcomes'],
   ['/#solutions', 'Solutions'],
   ['/#portfolio', 'Case Studies'],
+  ['/products', 'Products'],
   ['/#process', 'Process'],
   ['/#decision', 'Decision Framework'],
 ];
@@ -103,4 +104,108 @@ export const caseStudies = [
 
 export function getCaseStudy(slug) {
   return caseStudies.find((c) => c.id === slug);
+}
+
+export const products = [
+  {
+    id: 'whatsapp-crm',
+    label: 'WhatsApp CRM',
+    accent: 'whatsapp',
+    kicker: 'All-In-One WhatsApp CRM',
+    title: 'The Complete WhatsApp CRM For Sales & Support',
+    titleHighlight: 'WhatsApp CRM',
+    outcome: 'Turn WhatsApp Conversations Into Customers',
+    intro: 'Manage every WhatsApp conversation, automate marketing, and close more deals — all from one unified platform built for growing businesses.',
+    summary: 'Unified inbox, campaigns, automation, and commerce — built to run sales and support on WhatsApp without losing a single lead.',
+    pricing: null,
+    features: [
+      { title: 'Inbox', desc: 'Manage all your WhatsApp conversations in one unified inbox. Never miss a message.' },
+      { title: 'Contacts', desc: 'Organize and manage your contacts with tags, notes, and custom fields.' },
+      { title: 'Campaigns', desc: 'Send targeted WhatsApp campaigns to reach the right audience at the right time.' },
+      { title: 'Templates', desc: 'Create, save, and reuse message templates to save time and maintain consistency.' },
+      { title: 'Drip Campaigns', desc: 'Automate follow-ups and nurture leads with smart drip sequences.' },
+      { title: 'Automations', desc: 'Automate workflows, replies, and actions to run your business on autopilot.' },
+      { title: 'Session Broadcasts', desc: 'Send unlimited messages with WhatsApp Session for more reach and engagement.' },
+      { title: 'Forms', desc: 'Create custom WhatsApp forms to collect leads and feedback effortlessly.' },
+      { title: 'Reminders', desc: 'Set reminders and follow-ups to stay on top of important conversations and tasks.' },
+      { title: 'Commerce', desc: 'Showcase products, share catalogs, and close sales directly on WhatsApp.' }
+    ],
+    perfectFor: ['Sales Teams', 'Customer Support', 'D2C & Retail Brands', 'Service Businesses', 'Marketing Teams'],
+    relevant: [
+      'You currently handle sales or support conversations on personal WhatsApp',
+      'Leads get lost in chats and missed follow-ups',
+      'You want to automate repetitive replies, reminders, and campaigns',
+      'A growing team needs one shared inbox instead of one phone'
+    ],
+    cta: {
+      primaryLabel: 'Get Started Today',
+      primaryHref: 'https://wa.vpinformatics.in',
+      primaryExternal: true,
+      secondaryLabel: 'Chat On WhatsApp',
+      secondaryHref: 'https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20the%20WhatsApp%20CRM.'
+    }
+  },
+  {
+    id: 'static-website',
+    label: 'Professional Static Website',
+    accent: 'software',
+    kicker: 'Professional Static Website',
+    title: 'A Professional Business Website, Live In Days',
+    titleHighlight: 'Live In Days',
+    outcome: 'A Dependable Online Presence That Works From Day One',
+    intro: 'A complete, professionally built static business website — designed, secured, and launched by our team, so you can focus on running the business instead of managing tech.',
+    summary: 'A dependable, professionally delivered online presence — built, secured, and launched by our team, ready for business from day one.',
+    featuresHeading: 'Why Your Business Needs This',
+    pricing: {
+      name: 'Complete Business Website Package',
+      price: '₹11,000',
+      priceNote: 'Domain, hosting & business email for the first year included',
+      payLink: 'https://rzp.io/rzp/MNhQ5atH',
+      includes: [
+        'Professional Static Business Website',
+        'AI Chatbot For Customer Support',
+        'Domain Name Included (1 Year)',
+        'Mobile-Friendly Design',
+        'Basic SEO Setup',
+        'Admin Panel To Manage Content',
+        '1 Year Hosting Included',
+        'Business Email',
+        'Contact Form & WhatsApp Integration*',
+        'SSL Security Certificate'
+      ],
+      tools: [
+        { title: 'CRM', desc: 'Track leads to close' },
+        { title: 'Work Planner', desc: 'Meetings, notes, follow-ups' },
+        { title: 'Contacts', desc: 'One customer directory' },
+        { title: 'Accounting', desc: 'Books & invoices, in-house' },
+        { title: 'Calculators', desc: 'GST & tax, instantly' }
+      ],
+      note: '*WhatsApp Integration requires a WhatsApp Business API connection, provided by the customer or set up separately.'
+    },
+    features: [
+      { title: 'Instant Credibility', desc: 'Customers judge trust in seconds. A professional website makes your business look established and reliable, not informal.' },
+      { title: '24/7 Storefront', desc: 'Your business stays reachable and visible around the clock — even outside working hours, weekends, and holidays.' },
+      { title: 'More Qualified Leads', desc: 'A contact form, AI chatbot, and WhatsApp integration capture inquiries you would otherwise miss.' },
+      { title: 'Mobile-Ready Reach', desc: 'Most customers search on mobile first — a responsive, mobile-friendly design keeps you visible wherever they look.' },
+      { title: 'Run The Business, Not Just Show Up Online', desc: 'Built-in CRM, work planner, accounting, and calculators mean the site does real work, not just marketing.' },
+      { title: 'Faster Than Custom Development', desc: 'Launch in days, not months, at a fraction of custom software cost — with no technical knowledge required from you.' }
+    ],
+    perfectFor: ['Small Businesses', 'Startups', 'Doctors & Clinics', 'Consultants', 'Manufacturers', 'Traders', 'Educational Institutes', 'Service Providers'],
+    relevant: [
+      'Your business doesn’t have a professional website yet',
+      'You rely only on social media or word of mouth for new customers',
+      'You need to look credible and established without enterprise pricing',
+      'You want a website that also helps run the business — leads, planning, and billing in one place'
+    ],
+    cta: {
+      primaryLabel: 'Request A Free Quote',
+      primaryHref: '/#contact',
+      secondaryLabel: 'Schedule Strategy Consultation',
+      secondaryHref: 'https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation.'
+    }
+  }
+];
+
+export function getProduct(slug) {
+  return products.find((p) => p.id === slug);
 }

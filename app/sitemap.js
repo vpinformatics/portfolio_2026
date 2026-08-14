@@ -1,4 +1,4 @@
-import { siteUrl, caseStudies } from '../components/siteData';
+import { siteUrl, caseStudies, products } from '../components/siteData';
 
 export default function sitemap() {
   const now = new Date();
@@ -20,6 +20,18 @@ export default function sitemap() {
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
+    })),
+    {
+      url: `${siteUrl}/products`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    ...products.map((p) => ({
+      url: `${siteUrl}/products/${p.id}`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     })),
   ];
 }

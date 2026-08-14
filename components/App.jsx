@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import SvgIcon from './SvgIcon';
+import WhatsAppIcon from './WhatsAppIcon';
 import AnimatedSection from './AnimatedSection';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
@@ -36,6 +37,26 @@ export default function App() {
       copy: 'Reduce manual work, improve visibility, and streamline planning, inventory, quality control, dispatch, and operational workflows.',
     },
     {
+      kicker: 'WhatsApp CRM',
+      badge: 'Product',
+      accent: 'whatsapp',
+      title: <>Turn WhatsApp Conversations <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#25D366] via-[#128C7E] to-slate-900 bg-[size:200%] animate-gradient">Into Paying Customers</span></>,
+      copy: 'A unified inbox, campaigns, automation, and commerce — the complete WhatsApp CRM to manage leads, support, and sales in one place.',
+      subline: 'Simplify. Automate. Grow — all inside the app your customers already use.',
+      primaryCta: { label: 'Explore WhatsApp CRM', href: '/products/whatsapp-crm' },
+      secondaryCta: { label: 'Chat On WhatsApp', href: 'https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20the%20WhatsApp%20CRM.', external: true },
+    },
+    {
+      kicker: 'Professional Static Website',
+      badge: 'Product',
+      accent: 'software',
+      title: <>A Professional Business Website, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-500 to-slate-900 bg-[size:200%] animate-gradient">Live In Days.</span></>,
+      copy: 'A complete, professionally built website with CRM, work planner, accounting, and more — designed, secured, and launched by our team for ₹11,000.',
+      subline: 'Instant credibility, more leads, and a 24/7 storefront — with no technical knowledge required from you.',
+      primaryCta: { label: 'Explore Website Package', href: '/products/static-website' },
+      secondaryCta: { label: 'Request A Free Quote', href: '#contact' },
+    },
+    {
       kicker: 'Operational Independence',
       title: <>Convert Production Knowledge Into Systems <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-red-500 to-slate-900 bg-[size:200%] animate-gradient">That Keep Work Moving</span></>,
       copy: 'Reduce dependency on planners, supervisors, spreadsheets, and manual coordination by turning operational knowledge into scalable workflows and real-time visibility.',
@@ -46,6 +67,12 @@ export default function App() {
       copy: "We don't replace your ERP. We eliminate the gaps around it — planning spreadsheets, manual approvals, production blind spots, and dependency on key employees.",
     }
   ];
+
+  const HERO_ACCENTS = {
+    red: { dot: 'bg-red-600', kickerBorder: 'border-slate-300', badge: 'bg-red-600 text-white', primary: 'bg-red-600 hover:bg-slate-950', secondaryHover: 'hover:text-red-600 hover:border-red-600' },
+    whatsapp: { dot: 'bg-[#25D366]', kickerBorder: 'border-[#25D366]/50', badge: 'bg-[#25D366] text-white', primary: 'bg-[#25D366] hover:bg-[#128C7E]', secondaryHover: 'hover:text-[#128C7E] hover:border-[#25D366]' },
+    software: { dot: 'bg-indigo-600', kickerBorder: 'border-indigo-300', badge: 'bg-indigo-600 text-white', primary: 'bg-indigo-600 hover:bg-slate-950', secondaryHover: 'hover:text-indigo-600 hover:border-indigo-600' },
+  };
   const [activeHero, setActiveHero] = useState(0);
   const [activeFaq, setActiveFaq] = useState(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -125,8 +152,12 @@ export default function App() {
       <div className="max-w-7xl mx-auto text-center relative z-10 min-h-[540px] flex flex-col justify-center corner-mark text-slate-200 py-10">
         <div className="text-slate-800">
         <div className="inline-flex self-center items-center gap-3 mb-8">
-          <span className="w-2 h-2 bg-red-600 animate-pulse"></span>
-          <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-slate-500 border-b border-slate-300 pb-1">{heroSlides[activeHero].kicker}</span>
+          <span className={`w-2 h-2 ${HERO_ACCENTS[heroSlides[activeHero].accent || 'red'].dot} animate-pulse`}></span>
+          <span className={`font-mono text-[11px] tracking-[0.3em] uppercase text-slate-500 border-b ${HERO_ACCENTS[heroSlides[activeHero].accent || 'red'].kickerBorder} pb-1 inline-flex items-center gap-2`}>
+            {heroSlides[activeHero].accent === 'whatsapp' && <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />}
+            {heroSlides[activeHero].kicker}
+          </span>
+          {heroSlides[activeHero].badge && <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${HERO_ACCENTS[heroSlides[activeHero].accent || 'red'].badge}`}>{heroSlides[activeHero].badge}</span>}
         </div>
         <div key={activeHero} className="animate-fadeIn">
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-950 mb-8 leading-none max-w-7xl mx-auto">
@@ -136,14 +167,21 @@ export default function App() {
             {heroSlides[activeHero].copy}
           </p>
         </div>
-        <p className="text-sm sm:text-base text-slate-500 font-bold max-w-3xl mx-auto mb-10">Most factories don't need another ERP. They need fewer manual decisions, less dependency on specific people, and better operational visibility.</p>
+        <p className="text-sm sm:text-base text-slate-500 font-bold max-w-3xl mx-auto mb-10">{heroSlides[activeHero].subline || "Most factories don't need another ERP. They need fewer manual decisions, less dependency on specific people, and better operational visibility."}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-10">
-          <a href="#contact" className="w-full sm:w-auto bg-red-600 text-white px-8 py-4 font-extrabold text-sm uppercase tracking-widest hover:bg-slate-950 transition-all flex items-center justify-center gap-2">Request ERP Gap Assessment <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
-          <a href="https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-slate-700 hover:text-red-600 px-1 py-2 text-sm font-extrabold uppercase tracking-widest border-b-2 border-slate-300 hover:border-red-600 transition-all">Schedule Strategy Consultation</a>
+          {(() => {
+            const accent = HERO_ACCENTS[heroSlides[activeHero].accent || 'red'];
+            const primary = heroSlides[activeHero].primaryCta || { label: 'Request ERP Gap Assessment', href: '#contact' };
+            const secondary = heroSlides[activeHero].secondaryCta || { label: 'Schedule Strategy Consultation', href: 'https://wa.me/919664743159?text=Hi%2C%20I%27d%20like%20to%20schedule%20a%20strategy%20consultation.', external: true };
+            return <>
+              <a href={primary.href} target={primary.external ? '_blank' : undefined} rel={primary.external ? 'noopener noreferrer' : undefined} className={`w-full sm:w-auto ${accent.primary} text-white px-8 py-4 font-extrabold text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2`}>{primary.label} <SvgIcon name="ArrowRight" className="w-4 h-4" /></a>
+              <a href={secondary.href} target={secondary.external ? '_blank' : undefined} rel={secondary.external ? 'noopener noreferrer' : undefined} className={`inline-flex items-center gap-2 text-slate-700 ${accent.secondaryHover} px-1 py-2 text-sm font-extrabold uppercase tracking-widest border-b-2 border-slate-300 transition-all`}>{secondary.label}</a>
+            </>;
+          })()}
         </div>
         <div className="flex items-center justify-center gap-4">
           <button onClick={() => goHero(activeHero - 1)} className="text-slate-400 hover:text-red-600 transition-colors font-black text-lg" aria-label="Previous slide">‹</button>
-          {heroSlides.map((_, idx) => <button key={idx} onClick={() => goHero(idx)} className={`h-1 transition-all ${idx === activeHero ? 'bg-red-600 w-10' : 'bg-slate-300 hover:bg-slate-500 w-4'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
+          {heroSlides.map((s, idx) => <button key={idx} onClick={() => goHero(idx)} className={`h-1 transition-all ${idx === activeHero ? `${HERO_ACCENTS[s.accent || 'red'].dot} w-10` : 'bg-slate-300 hover:bg-slate-500 w-4'}`} aria-label={`Hero slide ${idx + 1}`}></button>)}
           <button onClick={() => goHero(activeHero + 1)} className="text-slate-400 hover:text-red-600 transition-colors font-black text-lg" aria-label="Next slide">›</button>
         </div>
         </div>
@@ -164,9 +202,13 @@ export default function App() {
           <AnimatedSection className="lg:col-span-5">
             <SectionLabel>Business Continuity Risk</SectionLabel>
             <h2 className="text-3xl md:text-5xl font-black text-slate-950 leading-tight mb-6">Your Operation Should Not Depend On Specific People.</h2>
-            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-10">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
-            <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-2 border-t-2 border-slate-950 pt-4">Roles that often become bottlenecks</h3>
-            <Ledger items={['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head']} mark="—" />
+            <p className="text-slate-600 text-base md:text-lg leading-relaxed font-medium mb-8">When critical operational knowledge lives only inside planners, supervisors, store managers, QC heads, or dispatch coordinators, growth becomes fragile. We convert that knowledge into repeatable systems.</p>
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-3 border-t-2 border-slate-950 pt-4">Roles that often become bottlenecks</h3>
+            <div className="flex flex-wrap gap-2">
+              {['Production Manager', 'Planner', 'Supervisor', 'Store Manager', 'Dispatch Coordinator', 'QC Head'].map(role => (
+                <span key={role} className="px-3 py-1.5 bg-white border border-slate-200 text-xs font-bold text-slate-600">{role}</span>
+              ))}
+            </div>
           </AnimatedSection>
           <AnimatedSection className="lg:col-span-7" delay={100}>
             <div className="grid md:grid-cols-2 md:divide-x md:divide-dashed md:divide-slate-300">

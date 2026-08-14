@@ -85,8 +85,25 @@ body.theme-dark .shadow-md,
 body.theme-dark .shadow-lg,
 body.theme-dark .shadow-xl,
 body.theme-dark .shadow-2xl{box-shadow:var(--vp-shadow)!important;}
-body.theme-dark nav{background:rgba(11,18,32,.88)!important;border-color:#1E293B!important;}
-body.theme-dark nav.bg-transparent{background:rgba(11,18,32,.50)!important;}
+.glass-nav{
+  background:rgba(255,255,255,.45);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.35);
+}
+.glass-nav.glass-nav-scrolled{
+  background:rgba(255,255,255,.78);
+  border-bottom-color:rgba(226,232,240,.9);
+  box-shadow:0 8px 30px rgba(15,23,42,.08);
+}
+body.theme-dark .glass-nav{
+  background:rgba(11,18,32,.45)!important;
+  border-color:rgba(255,255,255,.08)!important;
+}
+body.theme-dark .glass-nav.glass-nav-scrolled{
+  background:rgba(11,18,32,.82)!important;
+  border-color:#1E293B!important;
+}
 body.theme-dark #home{
   background:
     radial-gradient(circle at 50% 10%, rgba(239,68,68,.18), transparent 38%),

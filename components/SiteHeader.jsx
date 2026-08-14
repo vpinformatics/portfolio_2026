@@ -1,14 +1,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import SvgIcon from './SvgIcon';
 import VPLogo from './VPLogo';
 import { navLinks } from './siteData';
 
+// Only hash links (in-page sections on the homepage) can be scroll-spied —
+// route links like /products have nothing to observe.
+const sectionIds = navLinks
+  .filter(([href]) => href.startsWith('/#'))
+  .map(([href]) => href.slice(2));
+
 export default function SiteHeader() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState('light');
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     setTheme(localStorage.getItem('vp-theme') || 'light');
@@ -28,14 +37,45 @@ export default function SiteHeader() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Highlight whichever section is currently under the fixed header, homepage only.
+  useEffect(() => {
+    if (pathname !== '/') { setActiveSection(''); return; }
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+    if (!sections.length) return;
+
+    const headerOffset = 120;
+    const onScroll = () => {
+      let current = '';
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top <= headerOffset) current = el.id;
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [pathname]);
+
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 border-b border-slate-100' : 'bg-transparent py-4'}`}>
+    <nav className={`glass-nav fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-nav-scrolled py-2.5' : 'py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         <a href="/#home" className="flex items-center logo-shell"><VPLogo /></a>
         <div className="hidden xl:flex items-center gap-6">
-          {navLinks.map(([href, label]) => <a key={label} href={href} className="whitespace-nowrap text-xs font-extrabold uppercase tracking-wide text-slate-500 hover:text-red-600 transition-colors">{label}</a>)}
+          {navLinks.map(([href, label]) => {
+            const isActive = href === `/#${activeSection}`;
+            return (
+              <a
+                key={label}
+                href={href}
+                aria-current={isActive ? 'true' : undefined}
+                className={`whitespace-nowrap text-xs font-extrabold uppercase tracking-wide transition-colors ${isActive ? 'text-red-600' : 'text-slate-500 hover:text-red-600'}`}
+              >
+                {label}
+              </a>
+            );
+          })}
           <button onClick={toggleTheme} className="theme-toggle-btn px-3 py-2 rounded-xl border text-xs font-black uppercase tracking-wider flex items-center gap-2" aria-label="Toggle light and dark theme">
             <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
             <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
@@ -49,7 +89,20 @@ export default function SiteHeader() {
           <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
           <span>{theme === 'dark' ? 'Switch To Light Theme' : 'Switch To Dark Theme'}</span>
         </button>
-        {[...navLinks, ['/#contact', 'Request ERP Gap Assessment']].map(([href, label]) => <a key={label} href={href} onClick={() => setMobileMenuOpen(false)} className="font-bold text-slate-800 hover:text-red-600">{label}</a>)}
+        {[...navLinks, ['/#contact', 'Request ERP Gap Assessment']].map(([href, label]) => {
+          const isActive = href === `/#${activeSection}`;
+          return (
+            <a
+              key={label}
+              href={href}
+              onClick={() => setMobileMenuOpen(false)}
+              aria-current={isActive ? 'true' : undefined}
+              className={`font-bold ${isActive ? 'text-red-600' : 'text-slate-800 hover:text-red-600'}`}
+            >
+              {label}
+            </a>
+          );
+        })}
       </div>}
     </nav>
   );

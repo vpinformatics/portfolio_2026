@@ -279,13 +279,19 @@ export default function ChatWidget() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open chat"
-          className="fixed bottom-24 right-6 z-50 w-14 h-14 bg-slate-950 hover:bg-red-600 text-white shadow-xl shadow-black/20 flex items-center justify-center transition-all hover:scale-105"
+          aria-label="Open AI chat assistant"
+          className="group fixed bottom-24 right-6 z-50 h-14 pl-1.5 pr-5 rounded-full bg-slate-950 text-white shadow-xl shadow-black/25 flex items-center gap-3 transition-all hover:pr-6 hover:shadow-2xl hover:shadow-red-600/30"
         >
-          <svg viewBox="0 0 24 24" className="w-7 h-7 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-          </svg>
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-600 animate-pulse" />
+          <span className="relative flex-shrink-0 w-11 h-11 rounded-full bg-red-600 flex items-center justify-center">
+            <span className="absolute inset-0 rounded-full bg-red-600 animate-ping opacity-40 group-hover:opacity-70" />
+            <svg viewBox="0 0 24 24" className="relative w-5 h-5 fill-none stroke-white" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+            </svg>
+          </span>
+          <span className="leading-tight text-left">
+            <span className="block text-[9px] font-black uppercase tracking-[0.2em] text-red-400">AI Assistant</span>
+            <span className="block text-sm font-black">Ask a question</span>
+          </span>
         </button>
       )}
 
